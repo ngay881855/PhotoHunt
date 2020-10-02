@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -42,42 +41,46 @@
                             <searchBar contentMode="redraw" placeholder="Type your keyword" translatesAutoresizingMaskIntoConstraints="NO" id="flC-t9-oaA">
                                 <rect key="frame" x="0.0" y="74" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="RtN-hJ-ABn" id="dhL-TX-7dd"/>
+                                </connections>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xUv-wg-7BW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MHD-DW-X5F">
                                 <rect key="frame" x="0.0" y="130" width="414" height="683"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CK5-5m-Hiy">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoHuntCollectionViewCell" id="Zo2-xo-FqO" customClass="PhotoHuntCollectionViewCell" customModule="PhotoHunt" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="85.5" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Etn-rD-FNO">
-                                            <rect key="frame" x="0.0" y="0.0" width="85.5" height="128"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoHuntTableViewCell" rowHeight="248" id="eg9-Hh-mkr" customClass="PhotoHuntTableViewCell" customModule="PhotoHunt" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="248"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eg9-Hh-mkr" id="aJy-ea-crl">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="248"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yrb-zf-IUZ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="85.5" height="128"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SJu-4F-2w3">
+                                                    <rect key="frame" x="10" y="10" width="394" height="228"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="Yrb-zf-IUZ" secondAttribute="height" multiplier="2:3" id="M4v-Mu-uhE"/>
-                                                        <constraint firstAttribute="height" constant="128" id="jbQ-FG-pIh"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="SJu-4F-2w3" secondAttribute="height" multiplier="4:3" id="wT4-at-W3f"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Yrb-zf-IUZ" secondAttribute="bottom" id="VEG-kp-OQa"/>
-                                                <constraint firstItem="Yrb-zf-IUZ" firstAttribute="leading" secondItem="Etn-rD-FNO" secondAttribute="leading" id="Xto-kv-8Xh"/>
-                                                <constraint firstItem="Yrb-zf-IUZ" firstAttribute="top" secondItem="Etn-rD-FNO" secondAttribute="top" id="Zgl-LU-k0l"/>
-                                                <constraint firstAttribute="trailing" secondItem="Yrb-zf-IUZ" secondAttribute="trailing" id="hWc-0b-gW3"/>
+                                                <constraint firstAttribute="trailing" secondItem="SJu-4F-2w3" secondAttribute="trailing" constant="10" id="H8X-i2-7T5"/>
+                                                <constraint firstItem="SJu-4F-2w3" firstAttribute="top" secondItem="aJy-ea-crl" secondAttribute="top" constant="10" id="KVf-4B-g11"/>
+                                                <constraint firstItem="SJu-4F-2w3" firstAttribute="leading" secondItem="aJy-ea-crl" secondAttribute="leading" constant="10" id="PbC-G6-eJ3"/>
+                                                <constraint firstAttribute="bottom" secondItem="SJu-4F-2w3" secondAttribute="bottom" constant="10" id="gQf-6s-hqo"/>
+                                                <constraint firstItem="SJu-4F-2w3" firstAttribute="width" secondItem="aJy-ea-crl" secondAttribute="width" multiplier="0.951691" id="jeL-Aj-5nh"/>
                                             </constraints>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="customImageView" destination="SJu-4F-2w3" id="dNT-I8-Cy7"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="RtN-hJ-ABn" id="IaM-nV-E24"/>
+                                    <outlet property="delegate" destination="RtN-hJ-ABn" id="gEv-lk-AWP"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cwP-sO-TCu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -85,20 +88,23 @@
                             <constraint firstItem="flC-t9-oaA" firstAttribute="trailing" secondItem="cwP-sO-TCu" secondAttribute="trailing" id="1Ue-kn-5wV"/>
                             <constraint firstItem="4Xg-92-bUD" firstAttribute="leading" secondItem="cwP-sO-TCu" secondAttribute="leading" id="3ah-rj-mpx"/>
                             <constraint firstItem="flC-t9-oaA" firstAttribute="top" secondItem="4Xg-92-bUD" secondAttribute="bottom" id="4Le-WO-gIh"/>
-                            <constraint firstItem="xUv-wg-7BW" firstAttribute="leading" secondItem="cwP-sO-TCu" secondAttribute="leading" id="4gW-Qb-TCg"/>
                             <constraint firstItem="4Xg-92-bUD" firstAttribute="top" secondItem="cwP-sO-TCu" secondAttribute="top" id="7Qc-Em-wh9"/>
-                            <constraint firstItem="cwP-sO-TCu" firstAttribute="trailing" secondItem="xUv-wg-7BW" secondAttribute="trailing" id="Bpe-IM-n8e"/>
-                            <constraint firstItem="xUv-wg-7BW" firstAttribute="top" secondItem="flC-t9-oaA" secondAttribute="bottom" id="GA8-oI-iYC"/>
                             <constraint firstItem="cwP-sO-TCu" firstAttribute="trailing" secondItem="4Xg-92-bUD" secondAttribute="trailing" id="NPK-8o-ZVa"/>
-                            <constraint firstItem="cwP-sO-TCu" firstAttribute="bottom" secondItem="xUv-wg-7BW" secondAttribute="bottom" id="Y7D-31-HeQ"/>
+                            <constraint firstItem="cwP-sO-TCu" firstAttribute="trailing" secondItem="MHD-DW-X5F" secondAttribute="trailing" id="OAP-so-Kv7"/>
+                            <constraint firstItem="cwP-sO-TCu" firstAttribute="bottom" secondItem="MHD-DW-X5F" secondAttribute="bottom" id="Tq4-WI-oZz"/>
+                            <constraint firstItem="MHD-DW-X5F" firstAttribute="top" secondItem="flC-t9-oaA" secondAttribute="bottom" id="agl-qQ-cph"/>
                             <constraint firstItem="flC-t9-oaA" firstAttribute="leading" secondItem="cwP-sO-TCu" secondAttribute="leading" id="h8j-lH-aFU"/>
+                            <constraint firstItem="MHD-DW-X5F" firstAttribute="leading" secondItem="cwP-sO-TCu" secondAttribute="leading" id="hsT-4o-wQr"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Photo Hunt" id="j7g-RE-BMO"/>
+                    <connections>
+                        <outlet property="tableView" destination="MHD-DW-X5F" id="oNZ-BV-tjm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4fe-3U-dhE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-476" y="-818"/>
+            <point key="canvasLocation" x="-476.81159420289856" y="-818.30357142857144"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ukj-IU-A7q">

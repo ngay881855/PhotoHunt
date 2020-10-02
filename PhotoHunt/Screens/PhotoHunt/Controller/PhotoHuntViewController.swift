@@ -10,10 +10,18 @@ import UIKit
 class PhotoHuntViewController: UIViewController {
 
     // MARK: - IBOutlets
-    // MARK: - Private properties
-    private var providerList: [Provider] = []
+    @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Private properties
+    private var dataSource: DataSource {
+        accessDataQueue.sync {
+            return _dataSource
+        }
+    }
+    
+    private var _dataSource: DataSource = DataSource()
     private var accessDataQueue: DispatchQueue = DispatchQueue(label: "com.photohunt.accessDataQueue", attributes: .concurrent)
+    private var searchDispatchWorkItem: DispatchWorkItem?
     
     // MARK: - View Life Cycles
     override func viewDidLoad() {
@@ -21,7 +29,7 @@ class PhotoHuntViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         loadDefaultData()
-        downloadData(withURL: providerList[0].url + "laptop")
+        setupUI()
     }
 
     /*
@@ -35,25 +43,86 @@ class PhotoHuntViewController: UIViewController {
     */
 
     // MARK: - UISetup/Helpers/Actions
+    private func setupUI() {
+        self.tableView.tableFooterView = UIView()
+    }
+    
     private func loadDefaultData() {
         let provider = Provider(name: "Splash", url: "http://www.splashbase.co/api/v1/images/search?query=", isEnable: true)
-        providerList.append(provider)
+        self._dataSource.providerList.append(provider)
     }
     
     private func downloadData(withURL urlStr: String) {
+        let dispatchGroup: DispatchGroup = DispatchGroup()
         guard let url = URL(string: urlStr) else {
             return
         }
+        dispatchGroup.enter()
         DispatchQueue.global().async {
             do {
                 let data = try Data(contentsOf: url)
-                let item = try JSONDecoder().decode(SplashApiResponse.self, from: data)
-                self.accessDataQueue.async(flags: .barrier) {
-                    
-                }
+                let responseData = try JSONDecoder().decode(SplashApiResponse.self, from: data)
+                guard let images = responseData.images else { return }
+                self.accessDataQueue.async(flags: .barrier, execute: {
+                    self._dataSource.dictProviderData["Splash"] = images
+                })
+                dispatchGroup.leave()
             } catch {
                 print(error)
+                dispatchGroup.leave()
             }
+        }
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            self.tableView.reloadData()
+        }
+    }
+}
+
+// MARK: - Extensions
+// MARK: UITableViewDelegate
+extension PhotoHuntViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        self.dataSource.providerList[section].name
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        self.dataSource.providerList.count
+    }
+}
+
+// MARK: UITableViewDataSource
+extension PhotoHuntViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let providerName = self.dataSource.providerList[section].name
+        guard let count = self.dataSource.dictProviderData[providerName]?.count else { return 0 }
+        return count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoHuntTableViewCell", for: indexPath) as? PhotoHuntTableViewCell else {
+            fatalError()
+        }
+        let providerName = self.dataSource.providerList[indexPath.section].name
+        let image = self.dataSource.dictProviderData[providerName]?[indexPath.row]
+        cell.configureData(with: image)
+        return cell
+    }
+}
+
+// MARK: UISearchBarDelegate
+extension PhotoHuntViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count >= 5 {
+            searchDispatchWorkItem?.cancel()
+            searchDispatchWorkItem = DispatchWorkItem(block: {
+                print("searching: \(searchText)")
+                self.downloadData(withURL: self.dataSource.providerList[0].url + searchText)
+            })
+            if let workItem = searchDispatchWorkItem {
+                DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: workItem)
+            }
+        } else {
+            searchDispatchWorkItem?.cancel()
         }
     }
 }
