@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DFEE070D9DA92A5E1D6A36F9 /* Pods_PhotoHunt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0718A60EA292AA482D460400 /* Pods_PhotoHunt.framework */; };
 		FFC4771F25278A1700A7B7EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4771E25278A1700A7B7EF /* AppDelegate.swift */; };
 		FFC4772125278A1700A7B7EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4772025278A1700A7B7EF /* SceneDelegate.swift */; };
 		FFC4772325278A1700A7B7EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4772225278A1700A7B7EF /* ViewController.swift */; };
@@ -16,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0718A60EA292AA482D460400 /* Pods_PhotoHunt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoHunt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		073EB2E9B2F2308627CF93D2 /* Pods-PhotoHunt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoHunt.release.xcconfig"; path = "Target Support Files/Pods-PhotoHunt/Pods-PhotoHunt.release.xcconfig"; sourceTree = "<group>"; };
+		829A6111EF52D52D359A044C /* Pods-PhotoHunt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoHunt.debug.xcconfig"; path = "Target Support Files/Pods-PhotoHunt/Pods-PhotoHunt.debug.xcconfig"; sourceTree = "<group>"; };
 		FFC4771B25278A1700A7B7EF /* PhotoHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC4771E25278A1700A7B7EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFC4772025278A1700A7B7EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +35,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFEE070D9DA92A5E1D6A36F9 /* Pods_PhotoHunt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		062A35EE182A0BA410AA907A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0718A60EA292AA482D460400 /* Pods_PhotoHunt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B44B75FF6B045C513A8E7C94 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				829A6111EF52D52D359A044C /* Pods-PhotoHunt.debug.xcconfig */,
+				073EB2E9B2F2308627CF93D2 /* Pods-PhotoHunt.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		FFC4771225278A1700A7B7EF = {
 			isa = PBXGroup;
 			children = (
 				FFC4771D25278A1700A7B7EF /* PhotoHunt */,
 				FFC4771C25278A1700A7B7EF /* Products */,
+				B44B75FF6B045C513A8E7C94 /* Pods */,
+				062A35EE182A0BA410AA907A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +80,39 @@
 		FFC4771D25278A1700A7B7EF /* PhotoHunt */ = {
 			isa = PBXGroup;
 			children = (
-				FFC4771E25278A1700A7B7EF /* AppDelegate.swift */,
-				FFC4772025278A1700A7B7EF /* SceneDelegate.swift */,
+				FFC4773525278B7900A7B7EF /* Screens */,
+				FFC4773425278B6500A7B7EF /* Storyboards */,
+				FFC4773325278A5400A7B7EF /* Support Files */,
 				FFC4772225278A1700A7B7EF /* ViewController.swift */,
-				FFC4772425278A1700A7B7EF /* Main.storyboard */,
 				FFC4772725278A1900A7B7EF /* Assets.xcassets */,
-				FFC4772925278A1900A7B7EF /* LaunchScreen.storyboard */,
-				FFC4772C25278A1900A7B7EF /* Info.plist */,
 			);
 			path = PhotoHunt;
+			sourceTree = "<group>";
+		};
+		FFC4773325278A5400A7B7EF /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				FFC4771E25278A1700A7B7EF /* AppDelegate.swift */,
+				FFC4772025278A1700A7B7EF /* SceneDelegate.swift */,
+				FFC4772C25278A1900A7B7EF /* Info.plist */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		FFC4773425278B6500A7B7EF /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FFC4772425278A1700A7B7EF /* Main.storyboard */,
+				FFC4772925278A1900A7B7EF /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		FFC4773525278B7900A7B7EF /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +122,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FFC4772F25278A1900A7B7EF /* Build configuration list for PBXNativeTarget "PhotoHunt" */;
 			buildPhases = (
+				C9CB2C982F3DDEDBD7E3C15D /* [CP] Check Pods Manifest.lock */,
 				FFC4771725278A1700A7B7EF /* Sources */,
 				FFC4771825278A1700A7B7EF /* Frameworks */,
 				FFC4771925278A1700A7B7EF /* Resources */,
+				FFC4773D25278C8800A7B7EF /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -131,6 +181,49 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C9CB2C982F3DDEDBD7E3C15D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PhotoHunt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFC4773D25278C8800A7B7EF /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FFC4771725278A1700A7B7EF /* Sources */ = {
@@ -283,12 +376,13 @@
 		};
 		FFC4773025278A1900A7B7EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 829A6111EF52D52D359A044C /* Pods-PhotoHunt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FFM24X5V87;
-				INFOPLIST_FILE = PhotoHunt/Info.plist;
+				INFOPLIST_FILE = "PhotoHunt/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,12 +396,13 @@
 		};
 		FFC4773125278A1900A7B7EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 073EB2E9B2F2308627CF93D2 /* Pods-PhotoHunt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FFM24X5V87;
-				INFOPLIST_FILE = PhotoHunt/Info.plist;
+				INFOPLIST_FILE = "PhotoHunt/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

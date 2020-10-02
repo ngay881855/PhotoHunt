@@ -1,0 +1,7 @@
+line_length:
+    warning: 250
+trailing_whitespace:
+    ignores_empty_lines: true
+excluded:
+- Pods
+
