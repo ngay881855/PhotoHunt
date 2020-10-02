@@ -17,6 +17,7 @@
 		FFC4774625279DBF00A7B7EF /* PhotoHuntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4774525279DBF00A7B7EF /* PhotoHuntViewController.swift */; };
 		FFC4774A25279E3400A7B7EF /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4774925279E3400A7B7EF /* Provider.swift */; };
 		FFC4774D25279EC000A7B7EF /* PhotoHuntCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4774C25279EC000A7B7EF /* PhotoHuntCollectionViewCell.swift */; };
+		FFC477502527A6E800A7B7EF /* SplashApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4774F2527A6E800A7B7EF /* SplashApiResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		FFC4774525279DBF00A7B7EF /* PhotoHuntViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHuntViewController.swift; sourceTree = "<group>"; };
 		FFC4774925279E3400A7B7EF /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		FFC4774C25279EC000A7B7EF /* PhotoHuntCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHuntCollectionViewCell.swift; sourceTree = "<group>"; };
+		FFC4774F2527A6E800A7B7EF /* SplashApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashApiResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				FFC4774925279E3400A7B7EF /* Provider.swift */,
+				FFC4774F2527A6E800A7B7EF /* SplashApiResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				FFC4774625279DBF00A7B7EF /* PhotoHuntViewController.swift in Sources */,
 				FFC4772325278A1700A7B7EF /* ViewController.swift in Sources */,
 				FFC4774D25279EC000A7B7EF /* PhotoHuntCollectionViewCell.swift in Sources */,
+				FFC477502527A6E800A7B7EF /* SplashApiResponse.swift in Sources */,
 				FFC4771F25278A1700A7B7EF /* AppDelegate.swift in Sources */,
 				FFC4774A25279E3400A7B7EF /* Provider.swift in Sources */,
 				FFC4772125278A1700A7B7EF /* SceneDelegate.swift in Sources */,

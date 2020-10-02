@@ -11,12 +11,17 @@ class PhotoHuntViewController: UIViewController {
 
     // MARK: - IBOutlets
     // MARK: - Private properties
-    var providerList: [Provider] = []
+    private var providerList: [Provider] = []
     
+    private var accessDataQueue: DispatchQueue = DispatchQueue(label: "com.photohunt.accessDataQueue", attributes: .concurrent)
+    
+    // MARK: - View Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        loadDefaultData()
+        downloadData(withURL: providerList[0].url + "laptop")
     }
 
     /*
@@ -29,12 +34,26 @@ class PhotoHuntViewController: UIViewController {
     }
     */
 
+    // MARK: - UISetup/Helpers/Actions
+    private func loadDefaultData() {
+        let provider = Provider(name: "Splash", url: "http://www.splashbase.co/api/v1/images/search?query=", isEnable: true)
+        providerList.append(provider)
+    }
+    
+    private func downloadData(withURL urlStr: String) {
+        guard let url = URL(string: urlStr) else {
+            return
+        }
+        DispatchQueue.global().async {
+            do {
+                let data = try Data(contentsOf: url)
+                let item = try JSONDecoder().decode(SplashApiResponse.self, from: data)
+                self.accessDataQueue.async(flags: .barrier) {
+                    
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
 }
-// MARK: - static vars
-// MARK: - IBOutlets
-// MARK: - Public properties
-// MARK: - Private properties
-// MARK: - Initializers
-// MARK: - View Life Cycles
-// MARK: - UISetup/Helpers/Actions
-// MARK: - Extensions
