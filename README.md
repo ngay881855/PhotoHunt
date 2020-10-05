@@ -1,5 +1,16 @@
 # PhotoHunt
-A small app to search for images from different image providers (
+A small app to search for images from different image providers
+
+## Forking the code
+- Before compiling the code, make sure you have CocoaPods installed
+### Using [CocoaPods](https://cocoapods.org):
+
+Simply run these command in the project root directory:
+
+```ruby
+pod deintegrate
+pod install
+```
 
 ## Capabilities
 - Search for images using 3 different APIs
