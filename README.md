@@ -16,3 +16,7 @@ A small app to search for images from different image providers
 - SwiftLint is enabled to ensure clean code
 
 ## Images
+
+<p align="center">
+  <img src="https://github.com/ngay881855/PhotoHunt/blob/main/GIFs/ezgif-PhotoHunt_1.gif" height="600" />
+</p>
