@@ -10,11 +10,6 @@ import Foundation
 enum Constant {
     static let query = "query"
 }
-enum ApiName: String {
-    case splash = "Splash"
-    case pexels = "Pexels"
-    case pixaBay = "PixaBay"
-}
 
 enum Splash {
     static let name = "Splash"
