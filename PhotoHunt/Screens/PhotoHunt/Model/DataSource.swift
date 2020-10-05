@@ -9,5 +9,5 @@ import Foundation
 
 struct DataSource {
     var providerList: [Provider] = []
-    var dictProviderData: [String: [Image?]] = [:]
+    var dictProviderData: [String: [ContentResponse?]] = [:]
 }

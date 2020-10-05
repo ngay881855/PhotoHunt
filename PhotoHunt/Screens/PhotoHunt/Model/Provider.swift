@@ -9,6 +9,8 @@ import Foundation
 
 struct Provider {
     var name: String = String()
-    var url: String = String()
-    var isEnable: Bool = true
+    var baseUrl: String = String()
+    var parameters: [String: String]?
+    var header: [String: String]?
+    var isOn: Bool = true
 }

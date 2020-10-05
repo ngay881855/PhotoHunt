@@ -15,12 +15,13 @@ struct ApiResponse: Decodable {
 
 struct ContentResponse: Decodable {
     var imageID: Int?
-    var url: String?
+    var imageURL: String?
     var webFormatURL: String?
     var source: SourceDetails?
     
     enum CodingKeys: String, CodingKey {
         case imageID = "id"
+        case imageURL = "url"
         case webFormatURL = "webformatURL"
         case source = "src"
     }

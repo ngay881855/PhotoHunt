@@ -8,8 +8,11 @@
 import UIKit
 
 class PhotoHuntTableViewCell: UITableViewCell {
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var customImageView: UIImageView!
     
+    // MARK: - Private properties
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,8 +25,8 @@ class PhotoHuntTableViewCell: UITableViewCell {
         self.selectionStyle = .none
     }
 
-    func configureData(with image: Image?) {
-        guard let image = image, let urlString = image.smallImageURL, let url = URL(string: urlString) else { return }
+    func configureData(with imageURL: String) {
+        guard let url = URL(string: imageURL) else { return }
         customImageView.downloadImage(with: url)
     }
 }

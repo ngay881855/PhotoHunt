@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		DFEE070D9DA92A5E1D6A36F9 /* Pods_PhotoHunt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0718A60EA292AA482D460400 /* Pods_PhotoHunt.framework */; };
+		FF2878AD25292D3C008B895D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2878AC25292D3C008B895D /* Protocols.swift */; };
+		FF2CAAB62528CF7000E1F896 /* ProviderConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2CAAB52528CF7000E1F896 /* ProviderConfigViewController.swift */; };
+		FF2CAABA2528CF9D00E1F896 /* ProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2CAAB92528CF9D00E1F896 /* ProviderTableViewCell.swift */; };
+		FF2CAABF2528D77B00E1F896 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2CAABE2528D77B00E1F896 /* Constants.swift */; };
 		FFC4771F25278A1700A7B7EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4771E25278A1700A7B7EF /* AppDelegate.swift */; };
 		FFC4772125278A1700A7B7EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4772025278A1700A7B7EF /* SceneDelegate.swift */; };
 		FFC4772325278A1700A7B7EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4772225278A1700A7B7EF /* ViewController.swift */; };
@@ -16,16 +20,21 @@
 		FFC4772B25278A1900A7B7EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFC4772925278A1900A7B7EF /* LaunchScreen.storyboard */; };
 		FFC4774625279DBF00A7B7EF /* PhotoHuntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4774525279DBF00A7B7EF /* PhotoHuntViewController.swift */; };
 		FFC4774A25279E3400A7B7EF /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4774925279E3400A7B7EF /* Provider.swift */; };
-		FFC477502527A6E800A7B7EF /* SplashApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4774F2527A6E800A7B7EF /* SplashApiResponse.swift */; };
+		FFC477502527A6E800A7B7EF /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4774F2527A6E800A7B7EF /* ApiResponse.swift */; };
 		FFC477532527AF3200A7B7EF /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC477522527AF3200A7B7EF /* DataSource.swift */; };
 		FFC477572527B35200A7B7EF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC477562527B35200A7B7EF /* Extensions.swift */; };
 		FFC477632527DD5700A7B7EF /* PhotoHuntTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC477622527DD5700A7B7EF /* PhotoHuntTableViewCell.swift */; };
+		FFDA898C252ACC9E00A4BDC6 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDA898B252ACC9E00A4BDC6 /* ServiceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0718A60EA292AA482D460400 /* Pods_PhotoHunt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoHunt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		073EB2E9B2F2308627CF93D2 /* Pods-PhotoHunt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoHunt.release.xcconfig"; path = "Target Support Files/Pods-PhotoHunt/Pods-PhotoHunt.release.xcconfig"; sourceTree = "<group>"; };
 		829A6111EF52D52D359A044C /* Pods-PhotoHunt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoHunt.debug.xcconfig"; path = "Target Support Files/Pods-PhotoHunt/Pods-PhotoHunt.debug.xcconfig"; sourceTree = "<group>"; };
+		FF2878AC25292D3C008B895D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		FF2CAAB52528CF7000E1F896 /* ProviderConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConfigViewController.swift; sourceTree = "<group>"; };
+		FF2CAAB92528CF9D00E1F896 /* ProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderTableViewCell.swift; sourceTree = "<group>"; };
+		FF2CAABE2528D77B00E1F896 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FFC4771B25278A1700A7B7EF /* PhotoHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC4771E25278A1700A7B7EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFC4772025278A1700A7B7EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -36,10 +45,11 @@
 		FFC4772C25278A1900A7B7EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFC4774525279DBF00A7B7EF /* PhotoHuntViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHuntViewController.swift; sourceTree = "<group>"; };
 		FFC4774925279E3400A7B7EF /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
-		FFC4774F2527A6E800A7B7EF /* SplashApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashApiResponse.swift; sourceTree = "<group>"; };
+		FFC4774F2527A6E800A7B7EF /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		FFC477522527AF3200A7B7EF /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		FFC477562527B35200A7B7EF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FFC477622527DD5700A7B7EF /* PhotoHuntTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHuntTableViewCell.swift; sourceTree = "<group>"; };
+		FFDA898B252ACC9E00A4BDC6 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +81,39 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		FF2CAAB12528CF2700E1F896 /* ProviderConfig */ = {
+			isa = PBXGroup;
+			children = (
+				FF2CAAB42528CF4700E1F896 /* Model */,
+				FF2CAAB32528CF4200E1F896 /* View */,
+				FF2CAAB22528CF3C00E1F896 /* Controller */,
+			);
+			path = ProviderConfig;
+			sourceTree = "<group>";
+		};
+		FF2CAAB22528CF3C00E1F896 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FF2CAAB52528CF7000E1F896 /* ProviderConfigViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FF2CAAB32528CF4200E1F896 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FF2CAAB92528CF9D00E1F896 /* ProviderTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FF2CAAB42528CF4700E1F896 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		FFC4771225278A1700A7B7EF = {
 			isa = PBXGroup;
 			children = (
@@ -92,8 +135,8 @@
 		FFC4771D25278A1700A7B7EF /* PhotoHunt */ = {
 			isa = PBXGroup;
 			children = (
-				FFC4775A2527C42300A7B7EF /* Constants */,
-				FFC477552527B34000A7B7EF /* Extensions */,
+				FFDA898A252ACC7C00A4BDC6 /* Network Layer */,
+				FFC4775A2527C42300A7B7EF /* Utilities */,
 				FFC4773525278B7900A7B7EF /* Screens */,
 				FFC4773425278B6500A7B7EF /* Storyboards */,
 				FFC4773325278A5400A7B7EF /* Support Files */,
@@ -125,6 +168,7 @@
 		FFC4773525278B7900A7B7EF /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				FF2CAAB12528CF2700E1F896 /* ProviderConfig */,
 				FFC4774125279D6B00A7B7EF /* PhotoHunt */,
 			);
 			path = Screens;
@@ -144,7 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				FFC4774925279E3400A7B7EF /* Provider.swift */,
-				FFC4774F2527A6E800A7B7EF /* SplashApiResponse.swift */,
+				FFC4774F2527A6E800A7B7EF /* ApiResponse.swift */,
 				FFC477522527AF3200A7B7EF /* DataSource.swift */,
 			);
 			path = Model;
@@ -166,19 +210,22 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		FFC477552527B34000A7B7EF /* Extensions */ = {
+		FFC4775A2527C42300A7B7EF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FF2CAABE2528D77B00E1F896 /* Constants.swift */,
 				FFC477562527B35200A7B7EF /* Extensions.swift */,
+				FF2878AC25292D3C008B895D /* Protocols.swift */,
 			);
-			path = Extensions;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
-		FFC4775A2527C42300A7B7EF /* Constants */ = {
+		FFDA898A252ACC7C00A4BDC6 /* Network Layer */ = {
 			isa = PBXGroup;
 			children = (
+				FFDA898B252ACC9E00A4BDC6 /* ServiceManager.swift */,
 			);
-			path = Constants;
+			path = "Network Layer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,14 +344,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFC4774625279DBF00A7B7EF /* PhotoHuntViewController.swift in Sources */,
+				FF2CAAB62528CF7000E1F896 /* ProviderConfigViewController.swift in Sources */,
 				FFC477572527B35200A7B7EF /* Extensions.swift in Sources */,
 				FFC477632527DD5700A7B7EF /* PhotoHuntTableViewCell.swift in Sources */,
 				FFC4772325278A1700A7B7EF /* ViewController.swift in Sources */,
-				FFC477502527A6E800A7B7EF /* SplashApiResponse.swift in Sources */,
+				FFDA898C252ACC9E00A4BDC6 /* ServiceManager.swift in Sources */,
+				FFC477502527A6E800A7B7EF /* ApiResponse.swift in Sources */,
 				FFC4771F25278A1700A7B7EF /* AppDelegate.swift in Sources */,
+				FF2CAABA2528CF9D00E1F896 /* ProviderTableViewCell.swift in Sources */,
 				FFC4774A25279E3400A7B7EF /* Provider.swift in Sources */,
+				FF2878AD25292D3C008B895D /* Protocols.swift in Sources */,
 				FFC477532527AF3200A7B7EF /* DataSource.swift in Sources */,
 				FFC4772125278A1700A7B7EF /* SceneDelegate.swift in Sources */,
+				FF2CAABF2528D77B00E1F896 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
