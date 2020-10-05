@@ -1,5 +1,5 @@
 # PhotoHunt
-A small app to search for images from different image providers
+A small app to search for images from different image providers (
 
 ## Capabilities
 - Search for images using 3 different APIs
@@ -19,4 +19,5 @@ A small app to search for images from different image providers
 
 <p align="center">
   <img src="https://github.com/ngay881855/PhotoHunt/blob/main/GIFs/ezgif-PhotoHunt_1.gif" height="600" />
+  <img src="https://github.com/ngay881855/PhotoHunt/blob/main/GIFs/ezgif-PhotoHunt_2.gif" height="600" />
 </p>
