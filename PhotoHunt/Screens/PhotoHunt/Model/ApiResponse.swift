@@ -7,26 +7,37 @@
 
 import Foundation
 
-struct ApiResponse: Decodable {
-    var images: [ContentResponse]?
-    var photos: [ContentResponse]?
-    var hits: [ContentResponse]?
+struct Section {
+    var provider: Provider
+    var dataSource: [ImageProtocol] = []
 }
 
-struct ContentResponse: Decodable {
-    var imageID: Int?
-    var imageURL: String?
-    var webFormatURL: String?
-    var source: SourceDetails?
+protocol ImageProtocol: Decodable {
+    var imageUrl: String? { get }
     
-    enum CodingKeys: String, CodingKey {
-        case imageID = "id"
-        case imageURL = "url"
-        case webFormatURL = "webformatURL"
-        case source = "src"
+    init(dict: [String: Any])
+}
+
+struct SplashImageInfo: ImageProtocol {
+    var imageUrl: String?
+    
+    init(dict: [String: Any]) {
+        imageUrl = dict["url"] as? String
     }
 }
 
-struct SourceDetails: Decodable {
-    var medium: String?
+struct PexelsImageInfo: ImageProtocol {
+    var imageUrl: String?
+    
+    init(dict: [String: Any]) {
+        self.imageUrl = dict["medium"] as? String
+    }
+}
+
+struct PixabayImageInfo: ImageProtocol {
+    var imageUrl: String?
+    
+    init(dict: [String: Any]) {
+        self.imageUrl = dict["webformatURL"] as? String
+    }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF0729B3252E1FB800EE15A7 /* FetchApisOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0729B2252E1FB700EE15A7 /* FetchApisOperation.swift */; };
+		FF0729B6252E204200EE15A7 /* DownloadImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0729B5252E204200EE15A7 /* DownloadImageOperation.swift */; };
 		FF2878AD25292D3C008B895D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2878AC25292D3C008B895D /* Protocols.swift */; };
 		FF2CAAB62528CF7000E1F896 /* ProviderConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2CAAB52528CF7000E1F896 /* ProviderConfigViewController.swift */; };
 		FF2CAABA2528CF9D00E1F896 /* ProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2CAAB92528CF9D00E1F896 /* ProviderTableViewCell.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF0729B2252E1FB700EE15A7 /* FetchApisOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchApisOperation.swift; sourceTree = "<group>"; };
+		FF0729B5252E204200EE15A7 /* DownloadImageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageOperation.swift; sourceTree = "<group>"; };
 		FF2878AC25292D3C008B895D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FF2CAAB52528CF7000E1F896 /* ProviderConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConfigViewController.swift; sourceTree = "<group>"; };
 		FF2CAAB92528CF9D00E1F896 /* ProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderTableViewCell.swift; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				FFDA898B252ACC9E00A4BDC6 /* ServiceManager.swift */,
+				FF0729B2252E1FB700EE15A7 /* FetchApisOperation.swift */,
+				FF0729B5252E204200EE15A7 /* DownloadImageOperation.swift */,
 			);
 			path = "Network Layer";
 			sourceTree = "<group>";
@@ -298,7 +304,9 @@
 				FFC4774625279DBF00A7B7EF /* PhotoHuntViewController.swift in Sources */,
 				FF2CAAB62528CF7000E1F896 /* ProviderConfigViewController.swift in Sources */,
 				FFC477572527B35200A7B7EF /* Extensions.swift in Sources */,
+				FF0729B6252E204200EE15A7 /* DownloadImageOperation.swift in Sources */,
 				FFC477632527DD5700A7B7EF /* PhotoHuntTableViewCell.swift in Sources */,
+				FF0729B3252E1FB800EE15A7 /* FetchApisOperation.swift in Sources */,
 				FFC4772325278A1700A7B7EF /* ViewController.swift in Sources */,
 				FFDA898C252ACC9E00A4BDC6 /* ServiceManager.swift in Sources */,
 				FFC477502527A6E800A7B7EF /* ApiResponse.swift in Sources */,

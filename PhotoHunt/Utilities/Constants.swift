@@ -28,6 +28,6 @@ enum PixaBay {
     static let name = "PixaBay"
     static let baseUrl = "https://pixabay.com/api/"
     static let parameters = ["key": "18552487-1f1f788770c0bd9185181a8ff",
-                             "query": "",
+                             "q": "",
                              "image_type": "photo"]
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DataSource {
-    var providerList: [Provider] = []
-    var dictProviderData: [String: [ContentResponse?]] = [:]
-}
+//struct DataSource {
+//    var providerList: [Provider] = []
+//    var dictProviderData: [String: [ContentResponse?]] = [:]
+//}
