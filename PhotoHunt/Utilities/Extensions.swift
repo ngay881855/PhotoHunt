@@ -20,6 +20,7 @@ extension UIImageView {
                 let data = try Data(contentsOf: url)
                 let image = UIImage(data: data)
                 DispatchQueue.main.async {
+                    print("downloaded image url")
                     self.image = image
                 }
             } catch {

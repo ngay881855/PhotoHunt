@@ -39,12 +39,11 @@ class PhotoHuntViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        
-        self._dataSource.removeAll()
         if let searchText = self.searchText {
             searchData(with: searchText)
         }
-        tableView.reloadData()
+        
+        self.tableView.reloadData()
     }
 
     // MARK: - UISetup/Helpers/Actions
@@ -61,65 +60,58 @@ class PhotoHuntViewController: UIViewController {
         PhotoHuntViewController.providerList.append(provider)
     }
     
-    private func downloadData(withURLRequest urlRequest: URLRequest, provider: Provider) {
-        let dispatchGroup: DispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
-        DispatchQueue.global().async {
-            ServiceManager.manager.request(withRequest: urlRequest) { (data, error) in
-                guard let data = data as? Data else {
-                    if let error = error {
-                        print(error)
-                    }
-                    return
-                }
-                do {
-                    let responseObj = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                    guard let dictionary = responseObj as? [String: Any] else { return }
-                    var newSection: [ImageProtocol] = []
-                    switch provider.name {
-                    case Splash.name:
-                        guard let arrayItems = dictionary["images"] as? [[String: Any]], !arrayItems.isEmpty else { return }
-                        arrayItems.forEach { dictionary in
-                            newSection.append(SplashImageInfo(dict: dictionary))
-                        }
-                    case Pexels.name:
-                        guard let arrayItems = dictionary["photos"] as? [[String: Any]], !arrayItems.isEmpty else { return }
-                        arrayItems.forEach { dictionary in
-                            newSection.append(PexelsImageInfo(dict: dictionary))
-                        }
-                    case PixaBay.name:
-                        guard let arrayItems = dictionary["hits"] as? [[String: Any]], !arrayItems.isEmpty else { return }
-                        arrayItems.forEach { dictionary in
-                            newSection.append(PixabayImageInfo(dict: dictionary))
-                        }
-                    default:
-                        break
-                    }
-                    if newSection.count > 0 {
-                        self.accessDataQueue.async(flags: .barrier, execute: {
-                            print("adding images")
-                            
-                            let section = Section(provider: provider, dataSource: newSection)
-                            self._dataSource.append(section)
-                        })
-                    }
-                    dispatchGroup.leave()
-                    
-                } catch {
+    private func downloadData(withURLRequest urlRequest: URLRequest, provider: Provider, completion: @escaping () -> Void) {
+        ServiceManager.manager.request(withRequest: urlRequest) { (data, error) in
+            guard let data = data as? Data else {
+                if let error = error {
                     print(error)
-                    dispatchGroup.leave()
                 }
+                completion()
+                return
             }
-        }
-        dispatchGroup.notify(queue: DispatchQueue.main) {
-            print("refreshing tableView")
-            self.tableView.reloadData()
+            do {
+                let responseObj = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                guard let dictionary = responseObj as? [String: Any] else { completion(); return }
+                var newSection: [ImageProtocol] = []
+                switch provider.name {
+                case Splash.name:
+                    guard let arrayItems = dictionary["images"] as? [[String: Any]], !arrayItems.isEmpty else { completion(); return }
+                    arrayItems.forEach { dictionary in
+                        newSection.append(SplashImageInfo(dict: dictionary))
+                    }
+                case Pexels.name:
+                    guard let arrayItems = dictionary["photos"] as? [[String: Any]], !arrayItems.isEmpty else { completion(); return }
+                    arrayItems.forEach { dictionary in
+                        newSection.append(PexelsImageInfo(dict: dictionary))
+                    }
+                case PixaBay.name:
+                    guard let arrayItems = dictionary["hits"] as? [[String: Any]], !arrayItems.isEmpty else { completion(); return }
+                    arrayItems.forEach { dictionary in
+                        newSection.append(PixabayImageInfo(dict: dictionary))
+                    }
+                default:
+                    break
+                }
+                if newSection.count > 0 {
+                    self.accessDataQueue.async(flags: .barrier, execute: {
+                        print("adding images")
+                        
+                        let section = Section(provider: provider, dataSource: newSection)
+                        self._dataSource.append(section)
+                    })
+                }
+                completion()
+            } catch {
+                print(error)
+                completion()
+                return
+            }
         }
     }
     
     private func addQueryToProviders(_ query: String) {
         for index in 0..<PhotoHuntViewController.providerList.count where PhotoHuntViewController.providerList[index].isOn {
-            PhotoHuntViewController.providerList[index].parameters?[Constant.query] = query
+            PhotoHuntViewController.providerList[index].addQueryToParameters(with: query)
         }
     }
 
@@ -142,18 +134,28 @@ class PhotoHuntViewController: UIViewController {
     }
     
     private func searchData(with keyword: String) {
-        if keyword.count >= 5 {
+        if keyword.count >= Constant.minCharacters {
             searchDispatchWorkItem?.cancel()
             searchDispatchWorkItem = DispatchWorkItem(block: {
                 self.addQueryToProviders(keyword)
                 self.cache.removeAllObjects()
                 self._dataSource.removeAll()
                 
+                let dispatchGroup: DispatchGroup = DispatchGroup()
                 for provider in PhotoHuntViewController.providerList where provider.isOn {
-                    guard let urlRequest = self.configUrlRequest(provider: provider) else { return }
-                    self.downloadData(withURLRequest: urlRequest, provider: provider)
+                    dispatchGroup.enter()
+                    DispatchQueue.global().async {
+                        guard let urlRequest = self.configUrlRequest(provider: provider) else { dispatchGroup.leave(); return }
+                        
+                        self.downloadData(withURLRequest: urlRequest, provider: provider, completion: {
+                            dispatchGroup.leave()
+                        })
+                    }
                 }
-                
+                dispatchGroup.notify(queue: DispatchQueue.main) {
+                    print("refreshing tableView")
+                    self.tableView.reloadData()
+                }
             })
             if let workItem = searchDispatchWorkItem {
                 DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: workItem)
@@ -161,7 +163,6 @@ class PhotoHuntViewController: UIViewController {
         } else {
             searchDispatchWorkItem?.cancel()
         }
-        
     }
 }
 
@@ -187,23 +188,24 @@ extension PhotoHuntViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoHuntTableViewCell", for: indexPath) as? PhotoHuntTableViewCell else {
             fatalError()
         }
-        let providerName = self.dataSource[indexPath.section].provider.name
-        print(providerName)
+        cell.customImageView.image = nil
         if let imageUrl = self.dataSource[indexPath.section].dataSource[indexPath.row].imageUrl {
-
-            cell.customImageView.image = nil
-            // if image is already in the cache -> use it, otherwise download
-            let cacheKey = imageUrl as NSString
-            if let image = cache.object(forKey: cacheKey) {
-                print(cacheKey)
-                cell.customImageView.image = image
-            } else {
-                cell.configureData(with: imageUrl)
-                if let image = cell.customImageView.image {
-                    // add it to cache after downloaded
-                    cache.setObject(image, forKey: cacheKey)
-                }
-            }
+            cell.configureData(with: imageUrl)
+//
+//            // if image is already in the cache -> use it, otherwise download
+//            let cacheKey = imageUrl as NSString
+//            if let image = cache.object(forKey: cacheKey) {
+//                print(cacheKey)
+//                cell.customImageView.image = image
+//            } else {
+//                cell.configureData(with: imageUrl)
+//                if let image = cell.customImageView.image {
+//                    // add it to cache after downloaded
+//                    cache.setObject(image, forKey: cacheKey)
+//                }
+//            }
+        } else {
+            print("url nil")
         }
         
         return cell

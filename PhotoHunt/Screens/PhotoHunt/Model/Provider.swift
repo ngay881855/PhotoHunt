@@ -13,4 +13,17 @@ struct Provider {
     var parameters: [String: String]?
     var header: [String: String]?
     var isOn: Bool = true
+    
+    mutating func addQueryToParameters(with query: String) {
+        switch self.name {
+        case Splash.name:
+            self.parameters?[Splash.query] = query
+        case Pexels.name:
+            self.parameters?[Pexels.query] = query
+        case PixaBay.name:
+            self.parameters?[PixaBay.query] = query
+        default:
+            break
+        }
+    }
 }

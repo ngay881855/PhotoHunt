@@ -30,7 +30,8 @@ struct PexelsImageInfo: ImageProtocol {
     var imageUrl: String?
     
     init(dict: [String: Any]) {
-        self.imageUrl = dict["medium"] as? String
+        guard let srcDict = dict["src"] as? [String: Any] else { return }
+        self.imageUrl = srcDict["medium"] as? String
     }
 }
 
