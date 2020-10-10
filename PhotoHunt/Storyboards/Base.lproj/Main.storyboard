@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILR-2W-oJY">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -11,13 +12,13 @@
         <!--Config providers-->
         <scene sceneID="Oo7-zx-HJG">
             <objects>
-                <viewController storyboardIdentifier="viderConfigViewController" id="78d-pQ-t48" customClass="ProviderConfigViewController" customModule="PhotoHunt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="viderConfigViewController" id="78d-pQ-t48" customClass="ConfigProviderViewController" customModule="PhotoHunt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XPq-Qk-60k">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lpe-3L-U6w">
-                                <rect key="frame" x="0.0" y="94" width="414" height="719"/>
+                                <rect key="frame" x="0.0" y="138" width="414" height="675"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProviderTableViewCell" rowHeight="95" id="Nhl-XU-pDY" customClass="ProviderTableViewCell" customModule="PhotoHunt" customModuleProvider="target">
@@ -61,7 +62,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Api Providers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1E7-2E-P4H">
-                                <rect key="frame" x="10" y="54" width="394" height="30"/>
+                                <rect key="frame" x="10" y="98" width="394" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -80,37 +81,69 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Config providers" id="NyT-Ld-WPb"/>
+                    <navigationItem key="navigationItem" id="0g0-42-gLg"/>
                     <connections>
                         <outlet property="tableView" destination="Lpe-3L-U6w" id="Vbj-mB-Dtl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTA-5v-r2B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-477" y="-138"/>
+            <point key="canvasLocation" x="1117" y="-780"/>
+        </scene>
+        <!--Operation Queue-->
+        <scene sceneID="7ET-uL-cbS">
+            <objects>
+                <navigationController id="d3b-yH-wGc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Operation Queue" id="Q1B-uC-8sM"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bgj-NN-IHH">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e4Q-iZ-neF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-478" y="-100"/>
+        </scene>
+        <!--Grand Central Dispatch-->
+        <scene sceneID="yvR-9W-bQh">
+            <objects>
+                <navigationController id="9xM-fH-By9" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Grand Central Dispatch" id="Cve-nA-XRg"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uCp-aY-bwW">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="RtN-hJ-ABn" kind="relationship" relationship="rootViewController" id="dts-xT-bS2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0KQ-pv-FWT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-478" y="-780"/>
         </scene>
         <!--Photo Hunt-->
         <scene sceneID="wyr-8f-Ugp">
             <objects>
-                <viewController storyboardIdentifier="PhotoHuntViewController" id="RtN-hJ-ABn" customClass="PhotoHuntViewController" customModule="PhotoHunt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoHuntViewController_GCD" id="RtN-hJ-ABn" customClass="PhotoHuntViewController" customModule="PhotoHunt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nGe-XG-4HR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo Hunt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xg-92-bUD">
-                                <rect key="frame" x="0.0" y="44" width="414" height="30"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" placeholder="Type your keyword" translatesAutoresizingMaskIntoConstraints="NO" id="flC-t9-oaA">
-                                <rect key="frame" x="0.0" y="74" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <rect key="frame" x="0.0" y="118" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="RtN-hJ-ABn" id="dhL-TX-7dd"/>
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MHD-DW-X5F">
-                                <rect key="frame" x="0.0" y="130" width="414" height="683"/>
+                                <rect key="frame" x="0.0" y="174" width="414" height="639"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoHuntTableViewCell" rowHeight="248" id="eg9-Hh-mkr" customClass="PhotoHuntTableViewCell" customModule="PhotoHunt" customModuleProvider="target">
@@ -162,13 +195,20 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Photo Hunt" id="j7g-RE-BMO"/>
+                    <navigationItem key="navigationItem" id="dEw-cs-YQV">
+                        <barButtonItem key="rightBarButtonItem" title="Filter" id="UFh-YE-lTw">
+                            <connections>
+                                <segue destination="78d-pQ-t48" kind="show" identifier="ConfigProviderViewController" id="6Gk-t0-0uV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="MHD-DW-X5F" id="oNZ-BV-tjm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4fe-3U-dhE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-476.81159420289856" y="-818.30357142857144"/>
+            <point key="canvasLocation" x="339" y="-780"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ukj-IU-A7q">
@@ -180,13 +220,106 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="RtN-hJ-ABn" kind="relationship" relationship="viewControllers" id="6Yb-fy-jcE"/>
-                        <segue destination="78d-pQ-t48" kind="relationship" relationship="viewControllers" id="2Gv-Eo-Xtr"/>
+                        <segue destination="9xM-fH-By9" kind="relationship" relationship="viewControllers" id="lcT-Mv-61v"/>
+                        <segue destination="d3b-yH-wGc" kind="relationship" relationship="viewControllers" id="17O-cI-f0V"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQm-kA-fdO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1599" y="-439"/>
+        </scene>
+        <!--Photo Hunt-->
+        <scene sceneID="S73-WT-oRY">
+            <objects>
+                <viewController storyboardIdentifier="PhotoHuntViewController_OP" id="SeT-0H-N5N" customClass="PhotoHuntViewController" customModule="PhotoHunt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="q2B-mk-pdu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo Hunt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZO-Xd-r9L">
+                                <rect key="frame" x="0.0" y="44" width="414" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <searchBar contentMode="redraw" placeholder="Type your keyword" translatesAutoresizingMaskIntoConstraints="NO" id="Rbg-Yw-meU">
+                                <rect key="frame" x="0.0" y="74" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="SeT-0H-N5N" id="ieA-n5-7p4"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HHz-Y0-93h">
+                                <rect key="frame" x="0.0" y="130" width="414" height="732"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoHuntTableViewCell" rowHeight="248" id="aV1-4Q-26b" customClass="PhotoHuntTableViewCell" customModule="PhotoHunt" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="248"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aV1-4Q-26b" id="Bc6-Jq-HpF">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="248"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FFH-Xd-an5">
+                                                    <rect key="frame" x="30" y="21" width="354" height="206"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="FFH-Xd-an5" secondAttribute="height" multiplier="4:3" id="4Mr-Qo-er1"/>
+                                                        <constraint firstAttribute="height" constant="145" id="RdF-h0-iR7"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="i7a-lU-HmR">
+                                                    <rect key="frame" x="30" y="21" width="354" height="206"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FFH-Xd-an5" firstAttribute="leading" secondItem="Bc6-Jq-HpF" secondAttribute="leadingMargin" constant="10" id="3GP-OO-8Pb"/>
+                                                <constraint firstItem="i7a-lU-HmR" firstAttribute="top" secondItem="Bc6-Jq-HpF" secondAttribute="topMargin" constant="10" id="8Av-Fa-KV9"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="FFH-Xd-an5" secondAttribute="trailing" constant="10" id="Dgm-fC-rKy"/>
+                                                <constraint firstItem="FFH-Xd-an5" firstAttribute="top" secondItem="Bc6-Jq-HpF" secondAttribute="topMargin" constant="10" id="Dul-ek-cMV"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="FFH-Xd-an5" secondAttribute="bottom" constant="10" id="Iym-2C-zPd"/>
+                                                <constraint firstItem="i7a-lU-HmR" firstAttribute="leading" secondItem="Bc6-Jq-HpF" secondAttribute="leadingMargin" constant="10" id="SDS-Kd-Uab"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="i7a-lU-HmR" secondAttribute="trailing" constant="10" id="g0r-ke-BWF"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="i7a-lU-HmR" secondAttribute="bottom" constant="10" id="gVV-9u-YK2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="activityIndicator" destination="i7a-lU-HmR" id="06E-Ea-QmQ"/>
+                                            <outlet property="customImageView" destination="FFH-Xd-an5" id="AYm-yh-GdG"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="SeT-0H-N5N" id="0v4-3i-wVb"/>
+                                    <outlet property="delegate" destination="SeT-0H-N5N" id="0ff-MG-Zch"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="NvB-SM-f7a"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UZO-Xd-r9L" firstAttribute="top" secondItem="NvB-SM-f7a" secondAttribute="top" id="98i-30-B42"/>
+                            <constraint firstItem="Rbg-Yw-meU" firstAttribute="top" secondItem="UZO-Xd-r9L" secondAttribute="bottom" id="DZM-bP-udw"/>
+                            <constraint firstItem="NvB-SM-f7a" firstAttribute="trailing" secondItem="UZO-Xd-r9L" secondAttribute="trailing" id="DhD-lN-VAN"/>
+                            <constraint firstItem="UZO-Xd-r9L" firstAttribute="leading" secondItem="NvB-SM-f7a" secondAttribute="leading" id="LOF-fR-Hxa"/>
+                            <constraint firstItem="Rbg-Yw-meU" firstAttribute="leading" secondItem="NvB-SM-f7a" secondAttribute="leading" id="VuC-K1-431"/>
+                            <constraint firstItem="HHz-Y0-93h" firstAttribute="top" secondItem="Rbg-Yw-meU" secondAttribute="bottom" id="Wg4-bj-EcL"/>
+                            <constraint firstItem="Rbg-Yw-meU" firstAttribute="trailing" secondItem="NvB-SM-f7a" secondAttribute="trailing" id="aA1-lp-ZAW"/>
+                            <constraint firstItem="NvB-SM-f7a" firstAttribute="trailing" secondItem="HHz-Y0-93h" secondAttribute="trailing" id="fkT-yl-882"/>
+                            <constraint firstItem="HHz-Y0-93h" firstAttribute="leading" secondItem="NvB-SM-f7a" secondAttribute="leading" id="w5W-f8-VvC"/>
+                            <constraint firstItem="NvB-SM-f7a" firstAttribute="bottom" secondItem="HHz-Y0-93h" secondAttribute="bottom" id="xwI-ZH-H6T"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Photo Hunt" id="41Q-LX-2ga"/>
+                    <navigationItem key="navigationItem" id="cZI-7g-bTC">
+                        <barButtonItem key="rightBarButtonItem" title="Filter" id="Qao-vA-IBq"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="HHz-Y0-93h" id="UL1-gJ-xHW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fMI-Wa-szo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="338" y="-100"/>
         </scene>
     </scenes>
     <resources>

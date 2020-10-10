@@ -1,5 +1,5 @@
 //
-//  ProviderConfigViewController.swift
+//  ConfigProviderViewController.swift
 //  PhotoHunt
 //
 //  Created by Ngay Vong on 10/3/20.
@@ -7,27 +7,35 @@
 
 import UIKit
 
-class ProviderConfigViewController: UIViewController {
+class ConfigProviderViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - IBOutlets
     
+    // MARK: - Public properties
+    weak var delegate: PassObject?
+    
+    // MARK: - View Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.tableView.tableFooterView = UIView()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.delegate?.configChanged()
+    }
 }
 
 // MARK: - Extensions
 // MARK: UITableViewDelegate
-extension ProviderConfigViewController: UITableViewDelegate {
+extension ConfigProviderViewController: UITableViewDelegate {
     
 }
 
 // MARK: UITableViewDataSource
-extension ProviderConfigViewController: UITableViewDataSource {
+extension ConfigProviderViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         PhotoHuntViewController.providerList.count
     }
@@ -47,7 +55,7 @@ extension ProviderConfigViewController: UITableViewDataSource {
     }
 }
 
-extension ProviderConfigViewController: PassMessage {
+extension ConfigProviderViewController: PassObject {
     func showAlert(_ alert: UIAlertController) {
         self.present(alert, animated: true, completion: nil)
     }

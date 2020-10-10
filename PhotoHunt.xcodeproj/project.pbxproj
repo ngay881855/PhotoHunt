@@ -10,12 +10,14 @@
 		FF0729B3252E1FB800EE15A7 /* FetchApisOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0729B2252E1FB700EE15A7 /* FetchApisOperation.swift */; };
 		FF0729B6252E204200EE15A7 /* DownloadImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0729B5252E204200EE15A7 /* DownloadImageOperation.swift */; };
 		FF2878AD25292D3C008B895D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2878AC25292D3C008B895D /* Protocols.swift */; };
-		FF2CAAB62528CF7000E1F896 /* ProviderConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2CAAB52528CF7000E1F896 /* ProviderConfigViewController.swift */; };
+		FF2CAAB62528CF7000E1F896 /* ConfigProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2CAAB52528CF7000E1F896 /* ConfigProviderViewController.swift */; };
 		FF2CAABA2528CF9D00E1F896 /* ProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2CAAB92528CF9D00E1F896 /* ProviderTableViewCell.swift */; };
 		FF2CAABF2528D77B00E1F896 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2CAABE2528D77B00E1F896 /* Constants.swift */; };
+		FF30EF9F252F720E000035E5 /* ImageFilterOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30EF9E252F720E000035E5 /* ImageFilterOperation.swift */; };
+		FF66E56325315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E56225315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift */; };
+		FF66E56625315EC300F4630B /* OperationQueuePhotoHuntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E56525315EC300F4630B /* OperationQueuePhotoHuntViewController.swift */; };
 		FFC4771F25278A1700A7B7EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4771E25278A1700A7B7EF /* AppDelegate.swift */; };
 		FFC4772125278A1700A7B7EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4772025278A1700A7B7EF /* SceneDelegate.swift */; };
-		FFC4772325278A1700A7B7EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4772225278A1700A7B7EF /* ViewController.swift */; };
 		FFC4772625278A1700A7B7EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFC4772425278A1700A7B7EF /* Main.storyboard */; };
 		FFC4772825278A1900A7B7EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFC4772725278A1900A7B7EF /* Assets.xcassets */; };
 		FFC4772B25278A1900A7B7EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFC4772925278A1900A7B7EF /* LaunchScreen.storyboard */; };
@@ -32,13 +34,15 @@
 		FF0729B2252E1FB700EE15A7 /* FetchApisOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchApisOperation.swift; sourceTree = "<group>"; };
 		FF0729B5252E204200EE15A7 /* DownloadImageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageOperation.swift; sourceTree = "<group>"; };
 		FF2878AC25292D3C008B895D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
-		FF2CAAB52528CF7000E1F896 /* ProviderConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConfigViewController.swift; sourceTree = "<group>"; };
+		FF2CAAB52528CF7000E1F896 /* ConfigProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigProviderViewController.swift; sourceTree = "<group>"; };
 		FF2CAAB92528CF9D00E1F896 /* ProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderTableViewCell.swift; sourceTree = "<group>"; };
 		FF2CAABE2528D77B00E1F896 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FF30EF9E252F720E000035E5 /* ImageFilterOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFilterOperation.swift; sourceTree = "<group>"; };
+		FF66E56225315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueuePhotoHuntTableViewCell.swift; sourceTree = "<group>"; };
+		FF66E56525315EC300F4630B /* OperationQueuePhotoHuntViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueuePhotoHuntViewController.swift; sourceTree = "<group>"; };
 		FFC4771B25278A1700A7B7EF /* PhotoHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC4771E25278A1700A7B7EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFC4772025278A1700A7B7EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FFC4772225278A1700A7B7EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FFC4772525278A1700A7B7EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFC4772725278A1900A7B7EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFC4772A25278A1900A7B7EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,7 +80,7 @@
 		FF2CAAB22528CF3C00E1F896 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FF2CAAB52528CF7000E1F896 /* ProviderConfigViewController.swift */,
+				FF2CAAB52528CF7000E1F896 /* ConfigProviderViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -94,6 +98,41 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FF66E56025315E3100F4630B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FF66E56525315EC300F4630B /* OperationQueuePhotoHuntViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FF66E56125315E3A00F4630B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FF66E56225315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FFA77E30253117FE008A9CD7 /* PhotoHunt_GCD */ = {
+			isa = PBXGroup;
+			children = (
+				FFC4774225279D7400A7B7EF /* Model */,
+				FFC4774325279D7A00A7B7EF /* View */,
+				FFC4774425279D7E00A7B7EF /* Controller */,
+			);
+			path = PhotoHunt_GCD;
+			sourceTree = "<group>";
+		};
+		FFA77E3125311899008A9CD7 /* PhotoHunt_OperationQueue */ = {
+			isa = PBXGroup;
+			children = (
+				FF66E56125315E3A00F4630B /* View */,
+				FF66E56025315E3100F4630B /* Controller */,
+			);
+			path = PhotoHunt_OperationQueue;
 			sourceTree = "<group>";
 		};
 		FFC4771225278A1700A7B7EF = {
@@ -120,7 +159,6 @@
 				FFC4773525278B7900A7B7EF /* Screens */,
 				FFC4773425278B6500A7B7EF /* Storyboards */,
 				FFC4773325278A5400A7B7EF /* Support Files */,
-				FFC4772225278A1700A7B7EF /* ViewController.swift */,
 				FFC4772725278A1900A7B7EF /* Assets.xcassets */,
 			);
 			path = PhotoHunt;
@@ -148,20 +186,11 @@
 		FFC4773525278B7900A7B7EF /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				FFA77E3125311899008A9CD7 /* PhotoHunt_OperationQueue */,
+				FFA77E30253117FE008A9CD7 /* PhotoHunt_GCD */,
 				FF2CAAB12528CF2700E1F896 /* ProviderConfig */,
-				FFC4774125279D6B00A7B7EF /* PhotoHunt */,
 			);
 			path = Screens;
-			sourceTree = "<group>";
-		};
-		FFC4774125279D6B00A7B7EF /* PhotoHunt */ = {
-			isa = PBXGroup;
-			children = (
-				FFC4774225279D7400A7B7EF /* Model */,
-				FFC4774325279D7A00A7B7EF /* View */,
-				FFC4774425279D7E00A7B7EF /* Controller */,
-			);
-			path = PhotoHunt;
 			sourceTree = "<group>";
 		};
 		FFC4774225279D7400A7B7EF /* Model */ = {
@@ -196,6 +225,7 @@
 				FF2CAABE2528D77B00E1F896 /* Constants.swift */,
 				FFC477562527B35200A7B7EF /* Extensions.swift */,
 				FF2878AC25292D3C008B895D /* Protocols.swift */,
+				FF30EF9E252F720E000035E5 /* ImageFilterOperation.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -302,12 +332,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFC4774625279DBF00A7B7EF /* PhotoHuntViewController.swift in Sources */,
-				FF2CAAB62528CF7000E1F896 /* ProviderConfigViewController.swift in Sources */,
+				FF2CAAB62528CF7000E1F896 /* ConfigProviderViewController.swift in Sources */,
+				FF66E56625315EC300F4630B /* OperationQueuePhotoHuntViewController.swift in Sources */,
 				FFC477572527B35200A7B7EF /* Extensions.swift in Sources */,
 				FF0729B6252E204200EE15A7 /* DownloadImageOperation.swift in Sources */,
 				FFC477632527DD5700A7B7EF /* PhotoHuntTableViewCell.swift in Sources */,
+				FF30EF9F252F720E000035E5 /* ImageFilterOperation.swift in Sources */,
 				FF0729B3252E1FB800EE15A7 /* FetchApisOperation.swift in Sources */,
-				FFC4772325278A1700A7B7EF /* ViewController.swift in Sources */,
 				FFDA898C252ACC9E00A4BDC6 /* ServiceManager.swift in Sources */,
 				FFC477502527A6E800A7B7EF /* ApiResponse.swift in Sources */,
 				FFC4771F25278A1700A7B7EF /* AppDelegate.swift in Sources */,
@@ -316,6 +347,7 @@
 				FF2878AD25292D3C008B895D /* Protocols.swift in Sources */,
 				FFC477532527AF3200A7B7EF /* DataSource.swift in Sources */,
 				FFC4772125278A1700A7B7EF /* SceneDelegate.swift in Sources */,
+				FF66E56325315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift in Sources */,
 				FF2CAABF2528D77B00E1F896 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,6 +498,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FFM24X5V87;
 				INFOPLIST_FILE = "PhotoHunt/Support Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -485,6 +518,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FFM24X5V87;
 				INFOPLIST_FILE = "PhotoHunt/Support Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

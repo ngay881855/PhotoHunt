@@ -14,7 +14,7 @@ class ProviderTableViewCell: UITableViewCell {
     
     // MARK: - Public properties
     var rowIndex: Int = 0
-    var passMessageDelegate: PassMessage?
+    weak var passMessageDelegate: PassObject?
     
     override func awakeFromNib() {
         super.awakeFromNib()

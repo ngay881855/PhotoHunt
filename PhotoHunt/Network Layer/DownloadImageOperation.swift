@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class DownloadImageOperation: Operation {
+    
     var cache = NSCache<NSString, UIImage>()
     var contentImage: UIImage?
     var url: String

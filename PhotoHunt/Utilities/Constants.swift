@@ -8,7 +8,8 @@
 import Foundation
 
 enum Constant {
-    static let minCharacters = 5
+    static let minCharactersToSearch: Int = 5
+    static let timerIntervalToSearch: Double = 2.0
 }
 
 enum Splash {

@@ -1,5 +1,5 @@
 //
-//  PhotoHuntViewController.swift
+//  OperationQueuePhotoHuntViewController.swift
 //  PhotoHunt
 //
 //  Created by Ngay Vong on 10/2/20.
@@ -7,27 +7,44 @@
 
 import UIKit
 
-class PhotoHuntViewController: UIViewController {
+class OperationQueuePhotoHuntViewController: UIViewController {
 
     // MARK: - Static vars
     static var providerList: [Provider] = []
     
     // MARK: - IBOutlets
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView! {
+        didSet {
+            self.tableView.keyboardDismissMode = .onDrag
+        }
+    }
     
     // MARK: - Private properties
     private let cache = NSCache<NSString, UIImage>()
     private var dataSource: [Section] {
-        accessDataQueue.sync {
-            print("accessing data")
-            return _dataSource
-        }
+        self.accessDataQueue.sync(flags: .barrier, execute: {
+            return self._dataSource
+        })
+
+//        if #available(iOS 13.0, *) {
+//            print("accessing tableView using operationQueue")
+//            self.operationQueue.addBarrierBlock {
+//                return self._dataSource
+//            }
+//        } else {
+//            print("adding tableView using accessDataQueue")
+//            self.accessDataQueue.sync {
+//                return self._dataSource
+//            }
+//        }
     }
     
     private var _dataSource: [Section] = []
     private var accessDataQueue: DispatchQueue = DispatchQueue(label: "com.photohunt.accessDataQueue", attributes: .concurrent)
+    private let operationQueue = OperationQueue()
     private var searchDispatchWorkItem: DispatchWorkItem?
     private var searchText: String?
+    private var timer: Timer?
     
     // MARK: - View Life Cycles
     override func viewDidLoad() {
@@ -39,13 +56,16 @@ class PhotoHuntViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        if let searchText = self.searchText {
-            searchData(with: searchText)
-        }
         
-        self.tableView.reloadData()
     }
 
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let configProviderViewController = segue.destination as? ConfigProviderViewController {
+            configProviderViewController.delegate = self
+        }
+    }
+    
     // MARK: - UISetup/Helpers/Actions
     private func setupUI() {
         self.tableView.tableFooterView = UIView()
@@ -134,32 +154,84 @@ class PhotoHuntViewController: UIViewController {
     }
     
     private func searchData(with keyword: String) {
-        if keyword.count >= Constant.minCharacters {
-            searchDispatchWorkItem?.cancel()
-            searchDispatchWorkItem = DispatchWorkItem(block: {
-                self.addQueryToProviders(keyword)
-                self.cache.removeAllObjects()
-                self._dataSource.removeAll()
-                
-                let dispatchGroup: DispatchGroup = DispatchGroup()
-                for provider in PhotoHuntViewController.providerList where provider.isOn {
-                    dispatchGroup.enter()
-                    DispatchQueue.global().async {
-                        guard let urlRequest = self.configUrlRequest(provider: provider) else { dispatchGroup.leave(); return }
-                        
-                        self.downloadData(withURLRequest: urlRequest, provider: provider, completion: {
-                            dispatchGroup.leave()
-                        })
-                    }
-                }
-                dispatchGroup.notify(queue: DispatchQueue.main) {
-                    print("refreshing tableView")
+        if keyword.count >= Constant.minCharactersToSearch {
+            self.addQueryToProviders(keyword)
+            self.cache.removeAllObjects()
+            self._dataSource.removeAll()
+
+            let doneOperations = BlockOperation {
+                print("Done done done")
+                print("reloadTableViewOperation")
+                OperationQueue.main.addOperation {
+                    print("reloadTableViewOperation")
                     self.tableView.reloadData()
                 }
-            })
-            if let workItem = searchDispatchWorkItem {
-                DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: workItem)
             }
+            var added = false
+
+            for provider in PhotoHuntViewController.providerList where provider.isOn {
+                guard let urlRequest = self.configUrlRequest(provider: provider) else { return }
+
+                let fetchDataOperation = FetchApisOperation(urlRequest: urlRequest, provider: provider)
+                doneOperations.addDependency(fetchDataOperation)
+
+                operationQueue.addOperation(fetchDataOperation)
+                if !added {
+                    added = true
+                    operationQueue.addOperation(doneOperations)
+                }
+
+                fetchDataOperation.completionBlock = {
+                    if fetchDataOperation.isCancelled {
+                        print("canceled canceled")
+                        return
+                    }
+                    guard let section = fetchDataOperation.section else {
+                        return
+                    }
+                    self.accessDataQueue.async(flags: .barrier, execute: {
+                        self._dataSource.append(section)
+                    })
+//                    if #available(iOS 13.0, *) {
+//                        print("adding using operationQueue \(section.provider.name)")
+//                        self.operationQueue.addBarrierBlock {
+//                            self._dataSource.append(section)
+//                        }
+//                    } else {
+//                        print("adding using accessDataQueue \(section.provider.name)")
+//                        self.accessDataQueue.async(flags: .barrier, execute: {
+//                            self._dataSource.append(section)
+//                        })
+//                    }
+                }
+            }
+
+//
+//            searchDispatchWorkItem?.cancel()
+//            searchDispatchWorkItem = DispatchWorkItem(block: {
+//                self.addQueryToProviders(keyword)
+//                self.cache.removeAllObjects()
+//                self._dataSource.removeAll()
+//
+//                let dispatchGroup: DispatchGroup = DispatchGroup()
+//                for provider in PhotoHuntViewController.providerList where provider.isOn {
+//                    dispatchGroup.enter()
+//                    DispatchQueue.global().async {
+//                        guard let urlRequest = self.configUrlRequest(provider: provider) else { dispatchGroup.leave(); return }
+//
+//                        self.downloadData(withURLRequest: urlRequest, provider: provider, completion: {
+//                            dispatchGroup.leave()
+//                        })
+//                    }
+//                }
+//                dispatchGroup.notify(queue: DispatchQueue.main) {
+//                    print("refreshing tableView")
+//                    self.tableView.reloadData()
+//                }
+//            })
+//            if let workItem = searchDispatchWorkItem {
+//                DispatchQueue.global().asyncAfter(deadline: .now(), execute: workItem)
+//            }
         } else {
             searchDispatchWorkItem?.cancel()
         }
@@ -168,7 +240,7 @@ class PhotoHuntViewController: UIViewController {
 
 // MARK: - Extensions
 // MARK: UITableViewDelegate
-extension PhotoHuntViewController: UITableViewDelegate {
+extension OperationQueuePhotoHuntViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.dataSource[section].provider.name
     }
@@ -179,7 +251,7 @@ extension PhotoHuntViewController: UITableViewDelegate {
 }
 
 // MARK: UITableViewDataSource
-extension PhotoHuntViewController: UITableViewDataSource {
+extension OperationQueuePhotoHuntViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.dataSource[section].dataSource.count
     }
@@ -213,9 +285,26 @@ extension PhotoHuntViewController: UITableViewDataSource {
 }
 
 // MARK: UISearchBarDelegate
-extension PhotoHuntViewController: UISearchBarDelegate {
+extension OperationQueuePhotoHuntViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchData(with: searchText)
+        self.operationQueue.cancelAllOperations()
+        if let timer = self.timer {
+            timer.invalidate()
+        }
+        self.timer = Timer.scheduledTimer(withTimeInterval: Constant.timerIntervalToSearch, repeats: false, block: {_ in
+            self.searchData(with: searchText)
+        })
+        
         self.searchText = searchText
+    }
+}
+
+extension OperationQueuePhotoHuntViewController: PassObject {
+    func configChanged() {
+        if let searchText = self.searchText {
+            searchData(with: searchText)
+        }
+        
+        self.tableView.reloadData()
     }
 }
