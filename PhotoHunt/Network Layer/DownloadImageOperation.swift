@@ -9,10 +9,22 @@ import Foundation
 import UIKit
 
 class DownloadImageOperation: Operation {
-    
-    var cache = NSCache<NSString, UIImage>()
     var contentImage: UIImage?
     var url: String
+    
+    private var _isFinished: Bool = false
+    override var isFinished: Bool {
+        get {
+            return self._isFinished
+        }
+        set {
+            if _isFinished != newValue {
+                willChangeValue(forKey: "isFinished")
+                self._isFinished = newValue
+                didChangeValue(forKey: "isFinished")
+            }
+        }
+    }
     
     init(url: String) {
         self.url = url
@@ -25,26 +37,16 @@ class DownloadImageOperation: Operation {
         }
         
         do {
-            let cacheKey = url as NSString
+            guard let url = URL(string: url) else { return }
+            let data = try Data(contentsOf: url)
             
-            // If an image is already in the cache -> use it, else download it, add it to cache
-            if let image = cache.object(forKey: cacheKey) {
-                self.contentImage = image
-                completionBlock?()
+            if isCancelled {
+                print("return")
                 return
-            } else {
-                guard let url = URL(string: url) else { return }
-                let data = try Data(contentsOf: url)
-                
-                if isCancelled {
-                    print("return")
-                    return
-                }
-                guard let image = UIImage(data: data) else { return }
-                cache.setObject(image, forKey: cacheKey)
-                self.contentImage = image
-                completionBlock?()
             }
+            guard let image = UIImage(data: data) else { return }
+            self.contentImage = image
+            isFinished = true
         } catch {
             print(error)
             return

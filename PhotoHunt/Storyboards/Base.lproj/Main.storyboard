@@ -99,6 +99,9 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="SeT-0H-N5N" kind="relationship" relationship="rootViewController" id="ex7-kP-5oG"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e4Q-iZ-neF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -231,29 +234,29 @@
         <!--Photo Hunt-->
         <scene sceneID="S73-WT-oRY">
             <objects>
-                <viewController storyboardIdentifier="PhotoHuntViewController_OP" id="SeT-0H-N5N" customClass="PhotoHuntViewController" customModule="PhotoHunt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OperationQueuePhotoHuntViewController" id="SeT-0H-N5N" customClass="OperationQueuePhotoHuntViewController" customModule="PhotoHunt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q2B-mk-pdu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo Hunt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZO-Xd-r9L">
-                                <rect key="frame" x="0.0" y="44" width="414" height="30"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" placeholder="Type your keyword" translatesAutoresizingMaskIntoConstraints="NO" id="Rbg-Yw-meU">
-                                <rect key="frame" x="0.0" y="74" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="118" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="SeT-0H-N5N" id="ieA-n5-7p4"/>
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HHz-Y0-93h">
-                                <rect key="frame" x="0.0" y="130" width="414" height="732"/>
+                                <rect key="frame" x="0.0" y="174" width="414" height="639"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoHuntTableViewCell" rowHeight="248" id="aV1-4Q-26b" customClass="PhotoHuntTableViewCell" customModule="PhotoHunt" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OperationQueuePhotoHuntTableViewCell" rowHeight="248" id="aV1-4Q-26b" customClass="OperationQueuePhotoHuntTableViewCell" customModule="PhotoHunt" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="248"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aV1-4Q-26b" id="Bc6-Jq-HpF">
@@ -267,23 +270,15 @@
                                                         <constraint firstAttribute="height" constant="145" id="RdF-h0-iR7"/>
                                                     </constraints>
                                                 </imageView>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="i7a-lU-HmR">
-                                                    <rect key="frame" x="30" y="21" width="354" height="206"/>
-                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="FFH-Xd-an5" firstAttribute="leading" secondItem="Bc6-Jq-HpF" secondAttribute="leadingMargin" constant="10" id="3GP-OO-8Pb"/>
-                                                <constraint firstItem="i7a-lU-HmR" firstAttribute="top" secondItem="Bc6-Jq-HpF" secondAttribute="topMargin" constant="10" id="8Av-Fa-KV9"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="FFH-Xd-an5" secondAttribute="trailing" constant="10" id="Dgm-fC-rKy"/>
                                                 <constraint firstItem="FFH-Xd-an5" firstAttribute="top" secondItem="Bc6-Jq-HpF" secondAttribute="topMargin" constant="10" id="Dul-ek-cMV"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="FFH-Xd-an5" secondAttribute="bottom" constant="10" id="Iym-2C-zPd"/>
-                                                <constraint firstItem="i7a-lU-HmR" firstAttribute="leading" secondItem="Bc6-Jq-HpF" secondAttribute="leadingMargin" constant="10" id="SDS-Kd-Uab"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="i7a-lU-HmR" secondAttribute="trailing" constant="10" id="g0r-ke-BWF"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="i7a-lU-HmR" secondAttribute="bottom" constant="10" id="gVV-9u-YK2"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="activityIndicator" destination="i7a-lU-HmR" id="06E-Ea-QmQ"/>
                                             <outlet property="customImageView" destination="FFH-Xd-an5" id="AYm-yh-GdG"/>
                                         </connections>
                                     </tableViewCell>

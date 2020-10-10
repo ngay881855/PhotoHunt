@@ -80,55 +80,6 @@ class OperationQueuePhotoHuntViewController: UIViewController {
         PhotoHuntViewController.providerList.append(provider)
     }
     
-    private func downloadData(withURLRequest urlRequest: URLRequest, provider: Provider, completion: @escaping () -> Void) {
-        ServiceManager.manager.request(withRequest: urlRequest) { (data, error) in
-            guard let data = data as? Data else {
-                if let error = error {
-                    print(error)
-                }
-                completion()
-                return
-            }
-            do {
-                let responseObj = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                guard let dictionary = responseObj as? [String: Any] else { completion(); return }
-                var newSection: [ImageProtocol] = []
-                switch provider.name {
-                case Splash.name:
-                    guard let arrayItems = dictionary["images"] as? [[String: Any]], !arrayItems.isEmpty else { completion(); return }
-                    arrayItems.forEach { dictionary in
-                        newSection.append(SplashImageInfo(dict: dictionary))
-                    }
-                case Pexels.name:
-                    guard let arrayItems = dictionary["photos"] as? [[String: Any]], !arrayItems.isEmpty else { completion(); return }
-                    arrayItems.forEach { dictionary in
-                        newSection.append(PexelsImageInfo(dict: dictionary))
-                    }
-                case PixaBay.name:
-                    guard let arrayItems = dictionary["hits"] as? [[String: Any]], !arrayItems.isEmpty else { completion(); return }
-                    arrayItems.forEach { dictionary in
-                        newSection.append(PixabayImageInfo(dict: dictionary))
-                    }
-                default:
-                    break
-                }
-                if newSection.count > 0 {
-                    self.accessDataQueue.async(flags: .barrier, execute: {
-                        print("adding images")
-                        
-                        let section = Section(provider: provider, dataSource: newSection)
-                        self._dataSource.append(section)
-                    })
-                }
-                completion()
-            } catch {
-                print(error)
-                completion()
-                return
-            }
-        }
-    }
-    
     private func addQueryToProviders(_ query: String) {
         for index in 0..<PhotoHuntViewController.providerList.count where PhotoHuntViewController.providerList[index].isOn {
             PhotoHuntViewController.providerList[index].addQueryToParameters(with: query)
@@ -158,12 +109,10 @@ class OperationQueuePhotoHuntViewController: UIViewController {
             self.addQueryToProviders(keyword)
             self.cache.removeAllObjects()
             self._dataSource.removeAll()
-
+            self.tableView.reloadData()
+            
             let doneOperations = BlockOperation {
-                print("Done done done")
-                print("reloadTableViewOperation")
                 OperationQueue.main.addOperation {
-                    print("reloadTableViewOperation")
                     self.tableView.reloadData()
                 }
             }
@@ -205,33 +154,6 @@ class OperationQueuePhotoHuntViewController: UIViewController {
 //                    }
                 }
             }
-
-//
-//            searchDispatchWorkItem?.cancel()
-//            searchDispatchWorkItem = DispatchWorkItem(block: {
-//                self.addQueryToProviders(keyword)
-//                self.cache.removeAllObjects()
-//                self._dataSource.removeAll()
-//
-//                let dispatchGroup: DispatchGroup = DispatchGroup()
-//                for provider in PhotoHuntViewController.providerList where provider.isOn {
-//                    dispatchGroup.enter()
-//                    DispatchQueue.global().async {
-//                        guard let urlRequest = self.configUrlRequest(provider: provider) else { dispatchGroup.leave(); return }
-//
-//                        self.downloadData(withURLRequest: urlRequest, provider: provider, completion: {
-//                            dispatchGroup.leave()
-//                        })
-//                    }
-//                }
-//                dispatchGroup.notify(queue: DispatchQueue.main) {
-//                    print("refreshing tableView")
-//                    self.tableView.reloadData()
-//                }
-//            })
-//            if let workItem = searchDispatchWorkItem {
-//                DispatchQueue.global().asyncAfter(deadline: .now(), execute: workItem)
-//            }
         } else {
             searchDispatchWorkItem?.cancel()
         }
@@ -257,25 +179,32 @@ extension OperationQueuePhotoHuntViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoHuntTableViewCell", for: indexPath) as? PhotoHuntTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "OperationQueuePhotoHuntTableViewCell", for: indexPath) as? OperationQueuePhotoHuntTableViewCell else {
             fatalError()
         }
-        cell.customImageView.image = nil
+        
         if let imageUrl = self.dataSource[indexPath.section].dataSource[indexPath.row].imageUrl {
-            cell.configureData(with: imageUrl)
-//
-//            // if image is already in the cache -> use it, otherwise download
-//            let cacheKey = imageUrl as NSString
-//            if let image = cache.object(forKey: cacheKey) {
-//                print(cacheKey)
-//                cell.customImageView.image = image
-//            } else {
-//                cell.configureData(with: imageUrl)
-//                if let image = cell.customImageView.image {
-//                    // add it to cache after downloaded
-//                    cache.setObject(image, forKey: cacheKey)
-//                }
-//            }
+            // if image is already in the cache -> use it, otherwise download
+            let cacheKey = imageUrl as NSString
+            if let image = cache.object(forKey: cacheKey) {
+                print("caching")
+                cell.customImageView.image = image
+            } else {
+                let downloadImageOperation = DownloadImageOperation(url: imageUrl)
+                print("downloading")
+                operationQueue.addOperation(downloadImageOperation)
+                
+                downloadImageOperation.completionBlock = {
+                    if let image = downloadImageOperation.contentImage {
+                        OperationQueue.main.addOperation {
+                            print("downloaded")
+                            // add it to cache after downloaded
+                            self.cache.setObject(image, forKey: cacheKey)
+                            cell.customImageView.image = image
+                        }
+                    }
+                }
+            }
         } else {
             print("url nil")
         }

@@ -196,10 +196,8 @@ extension PhotoHuntViewController: UITableViewDataSource {
             // if image is already in the cache -> use it, otherwise download
             let cacheKey = imageUrl as NSString
             if let image = cache.object(forKey: cacheKey) {
-                print("caching image")
                 cell.customImageView.image = UIImage(ciImage: image)
             } else {
-                print("donwload image")
                 cell.configureData(with: imageUrl)
                 if let image = cell.customImageView.image {
                     // add it to cache after downloaded
