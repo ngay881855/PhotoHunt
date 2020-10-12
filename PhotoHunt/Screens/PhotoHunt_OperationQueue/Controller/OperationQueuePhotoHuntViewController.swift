@@ -8,7 +8,6 @@
 import UIKit
 
 class OperationQueuePhotoHuntViewController: UIViewController {
-    let filter: CIFilterType = .bloomFilter
     
     // MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView! {
@@ -50,7 +49,6 @@ class OperationQueuePhotoHuntViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupUI()
-        operationQueue.maxConcurrentOperationCount = 1
     }
 
     // MARK: - Navigation
@@ -155,6 +153,32 @@ extension OperationQueuePhotoHuntViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         self.dataSource.count
     }
+    
+    // MARK: - UIScrollView Delegate methods
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+      suspendAllOperations()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+      if !decelerate {
+        resumeAllOperations()
+      }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+      resumeAllOperations()
+    }
+    
+    // MARK: - operation management
+    
+    func suspendAllOperations() {
+      operationQueue.isSuspended = true
+    }
+    
+    func resumeAllOperations() {
+        operationQueue.isSuspended = false
+    }
 }
 
 // MARK: UITableViewDataSource
@@ -173,10 +197,11 @@ extension OperationQueuePhotoHuntViewController: UITableViewDataSource {
         if let imageUrl = self.dataSource[indexPath.section].dataSource[indexPath.row].imageUrl {
             // if image is already in the cache -> use it, otherwise download
             let cacheKey = imageUrl as NSString
+            let filter = self.dataSource[indexPath.section].provider.imageFilterType.cIFilterType
             if let filterImage = cache.object(forKey: cacheKey) {
                 print("caching")
                 // If the filterType is different
-                if filterImage.filterType != self.filter {
+                if filterImage.filterType != filter {
                     // Apply new filter
                     let imageFilterOperation = ImageFilterOperation(inputImage: filterImage.image, filter: filter)
                     operationQueue.addOperation(imageFilterOperation)
@@ -185,7 +210,7 @@ extension OperationQueuePhotoHuntViewController: UITableViewDataSource {
                         print("filtering")
                         // Add new image back to the cache
                         if let image = imageFilterOperation.outputImage {
-                            let filteredImage = FilterImage(filterType: self.filter, image: image)
+                            let filteredImage = FilterImage(filterType: filter, image: image)
                             OperationQueue.main.addOperation {
                                 self.cache.setObject(filteredImage, forKey: cacheKey)
                                 cell.customImageView.image = filteredImage.image
@@ -207,14 +232,14 @@ extension OperationQueuePhotoHuntViewController: UITableViewDataSource {
                     if let image = downloadImageOperation.contentImage {
                         OperationQueue.main.addOperation {
                             print("downloaded")
-                            if self.filter != .normal {
-                                let imageFilterOperation = ImageFilterOperation(inputImage: image, filter: self.filter)
+                            if filter != .normal {
+                                let imageFilterOperation = ImageFilterOperation(inputImage: image, filter: filter)
                                 self.operationQueue.addOperation(imageFilterOperation)
 
                                 imageFilterOperation.completionBlock = {
                                     // Add new image back to the cache
                                     if let outputImage = imageFilterOperation.outputImage {
-                                        let filteredImage = FilterImage(filterType: self.filter, image: outputImage)
+                                        let filteredImage = FilterImage(filterType: filter, image: outputImage)
                                         OperationQueue.main.addOperation {
                                             self.cache.setObject(filteredImage, forKey: cacheKey)
                                             cell.customImageView.image = outputImage

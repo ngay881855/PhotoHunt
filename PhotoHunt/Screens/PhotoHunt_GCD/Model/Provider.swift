@@ -13,7 +13,7 @@ struct Provider {
     var parameters: [String: String]?
     var header: [String: String]?
     var isOn: Bool = true
-    var filterType: CIFilterType = .normal
+    var imageFilterType: ImageFilterType = ImageFilterType(name: "Normal", cIFilterType: .normal)
     
     mutating func addQueryToParameters(with query: String) {
         switch self.name {

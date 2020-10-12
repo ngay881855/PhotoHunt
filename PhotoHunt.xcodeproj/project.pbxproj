@@ -18,6 +18,7 @@
 		FF451194253401BF00602981 /* ContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF451193253401BF00602981 /* ContextManager.swift */; };
 		FF45119725340ED500602981 /* FilterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45119625340ED500602981 /* FilterImage.swift */; };
 		FF45119C2534271A00602981 /* ProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45119B2534271A00602981 /* ProviderManager.swift */; };
+		FF45119F253438F500602981 /* ImageFilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45119E253438F500602981 /* ImageFilterType.swift */; };
 		FF66E56325315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E56225315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift */; };
 		FF66E56625315EC300F4630B /* OperationQueuePhotoHuntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E56525315EC300F4630B /* OperationQueuePhotoHuntViewController.swift */; };
 		FFC4771F25278A1700A7B7EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4771E25278A1700A7B7EF /* AppDelegate.swift */; };
@@ -46,6 +47,7 @@
 		FF451193253401BF00602981 /* ContextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextManager.swift; sourceTree = "<group>"; };
 		FF45119625340ED500602981 /* FilterImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterImage.swift; sourceTree = "<group>"; };
 		FF45119B2534271A00602981 /* ProviderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderManager.swift; sourceTree = "<group>"; };
+		FF45119E253438F500602981 /* ImageFilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFilterType.swift; sourceTree = "<group>"; };
 		FF66E56225315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueuePhotoHuntTableViewCell.swift; sourceTree = "<group>"; };
 		FF66E56525315EC300F4630B /* OperationQueuePhotoHuntViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueuePhotoHuntViewController.swift; sourceTree = "<group>"; };
 		FFC4771B25278A1700A7B7EF /* PhotoHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,6 +272,7 @@
 				FF30EF9E252F720E000035E5 /* ImageFilterOperation.swift */,
 				FF451193253401BF00602981 /* ContextManager.swift */,
 				FF45119B2534271A00602981 /* ProviderManager.swift */,
+				FF45119E253438F500602981 /* ImageFilterType.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				FF2878AD25292D3C008B895D /* Protocols.swift in Sources */,
 				FFC477532527AF3200A7B7EF /* DataSource.swift in Sources */,
 				FFC4772125278A1700A7B7EF /* SceneDelegate.swift in Sources */,
+				FF45119F253438F500602981 /* ImageFilterType.swift in Sources */,
 				FF66E56325315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift in Sources */,
 				FF2CAABF2528D77B00E1F896 /* Constants.swift in Sources */,
 				FF4511902533FA6900602981 /* CIFilterType.swift in Sources */,

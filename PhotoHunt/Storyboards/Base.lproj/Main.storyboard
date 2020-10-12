@@ -60,8 +60,8 @@
                                                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SVF-eD-BWf">
                                                                     <rect key="frame" x="54" y="0.0" width="320" height="42"/>
                                                                     <connections>
-                                                                        <outlet property="dataSource" destination="78d-pQ-t48" id="gx6-os-6pU"/>
-                                                                        <outlet property="delegate" destination="78d-pQ-t48" id="tfb-Jg-G7C"/>
+                                                                        <outlet property="dataSource" destination="Nhl-XU-pDY" id="TDV-Ae-K30"/>
+                                                                        <outlet property="delegate" destination="Nhl-XU-pDY" id="7If-wM-tPA"/>
                                                                     </connections>
                                                                 </pickerView>
                                                             </subviews>
