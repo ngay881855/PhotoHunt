@@ -14,6 +14,10 @@
 		FF2CAABA2528CF9D00E1F896 /* ProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2CAAB92528CF9D00E1F896 /* ProviderTableViewCell.swift */; };
 		FF2CAABF2528D77B00E1F896 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2CAABE2528D77B00E1F896 /* Constants.swift */; };
 		FF30EF9F252F720E000035E5 /* ImageFilterOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30EF9E252F720E000035E5 /* ImageFilterOperation.swift */; };
+		FF4511902533FA6900602981 /* CIFilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45118F2533FA6900602981 /* CIFilterType.swift */; };
+		FF451194253401BF00602981 /* ContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF451193253401BF00602981 /* ContextManager.swift */; };
+		FF45119725340ED500602981 /* FilterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45119625340ED500602981 /* FilterImage.swift */; };
+		FF45119C2534271A00602981 /* ProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45119B2534271A00602981 /* ProviderManager.swift */; };
 		FF66E56325315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E56225315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift */; };
 		FF66E56625315EC300F4630B /* OperationQueuePhotoHuntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66E56525315EC300F4630B /* OperationQueuePhotoHuntViewController.swift */; };
 		FFC4771F25278A1700A7B7EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4771E25278A1700A7B7EF /* AppDelegate.swift */; };
@@ -38,6 +42,10 @@
 		FF2CAAB92528CF9D00E1F896 /* ProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderTableViewCell.swift; sourceTree = "<group>"; };
 		FF2CAABE2528D77B00E1F896 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FF30EF9E252F720E000035E5 /* ImageFilterOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFilterOperation.swift; sourceTree = "<group>"; };
+		FF45118F2533FA6900602981 /* CIFilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilterType.swift; sourceTree = "<group>"; };
+		FF451193253401BF00602981 /* ContextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextManager.swift; sourceTree = "<group>"; };
+		FF45119625340ED500602981 /* FilterImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterImage.swift; sourceTree = "<group>"; };
+		FF45119B2534271A00602981 /* ProviderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderManager.swift; sourceTree = "<group>"; };
 		FF66E56225315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueuePhotoHuntTableViewCell.swift; sourceTree = "<group>"; };
 		FF66E56525315EC300F4630B /* OperationQueuePhotoHuntViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueuePhotoHuntViewController.swift; sourceTree = "<group>"; };
 		FFC4771B25278A1700A7B7EF /* PhotoHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +104,39 @@
 		FF2CAAB42528CF4700E1F896 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FF45118B2533FA3600602981 /* EditPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				FF45118E2533FA5C00602981 /* Model */,
+				FF45118D2533FA5700602981 /* View */,
+				FF45118C2533FA4D00602981 /* Controller */,
+			);
+			path = EditPhoto;
+			sourceTree = "<group>";
+		};
+		FF45118C2533FA4D00602981 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FF45118D2533FA5700602981 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FF45118E2533FA5C00602981 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FF45118F2533FA6900602981 /* CIFilterType.swift */,
+				FF45119625340ED500602981 /* FilterImage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -186,6 +227,7 @@
 		FFC4773525278B7900A7B7EF /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				FF45118B2533FA3600602981 /* EditPhoto */,
 				FFA77E3125311899008A9CD7 /* PhotoHunt_OperationQueue */,
 				FFA77E30253117FE008A9CD7 /* PhotoHunt_GCD */,
 				FF2CAAB12528CF2700E1F896 /* ProviderConfig */,
@@ -226,6 +268,8 @@
 				FFC477562527B35200A7B7EF /* Extensions.swift */,
 				FF2878AC25292D3C008B895D /* Protocols.swift */,
 				FF30EF9E252F720E000035E5 /* ImageFilterOperation.swift */,
+				FF451193253401BF00602981 /* ContextManager.swift */,
+				FF45119B2534271A00602981 /* ProviderManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -335,6 +379,7 @@
 				FF2CAAB62528CF7000E1F896 /* ConfigProviderViewController.swift in Sources */,
 				FF66E56625315EC300F4630B /* OperationQueuePhotoHuntViewController.swift in Sources */,
 				FFC477572527B35200A7B7EF /* Extensions.swift in Sources */,
+				FF45119C2534271A00602981 /* ProviderManager.swift in Sources */,
 				FF0729B6252E204200EE15A7 /* DownloadImageOperation.swift in Sources */,
 				FFC477632527DD5700A7B7EF /* PhotoHuntTableViewCell.swift in Sources */,
 				FF30EF9F252F720E000035E5 /* ImageFilterOperation.swift in Sources */,
@@ -342,6 +387,8 @@
 				FFDA898C252ACC9E00A4BDC6 /* ServiceManager.swift in Sources */,
 				FFC477502527A6E800A7B7EF /* ApiResponse.swift in Sources */,
 				FFC4771F25278A1700A7B7EF /* AppDelegate.swift in Sources */,
+				FF451194253401BF00602981 /* ContextManager.swift in Sources */,
+				FF45119725340ED500602981 /* FilterImage.swift in Sources */,
 				FF2CAABA2528CF9D00E1F896 /* ProviderTableViewCell.swift in Sources */,
 				FFC4774A25279E3400A7B7EF /* Provider.swift in Sources */,
 				FF2878AD25292D3C008B895D /* Protocols.swift in Sources */,
@@ -349,6 +396,7 @@
 				FFC4772125278A1700A7B7EF /* SceneDelegate.swift in Sources */,
 				FF66E56325315EBB00F4630B /* OperationQueuePhotoHuntTableViewCell.swift in Sources */,
 				FF2CAABF2528D77B00E1F896 /* Constants.swift in Sources */,
+				FF4511902533FA6900602981 /* CIFilterType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

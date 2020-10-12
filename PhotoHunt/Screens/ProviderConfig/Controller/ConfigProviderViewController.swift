@@ -24,6 +24,7 @@ class ConfigProviderViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        #warning("use notification to all tabs")
         self.delegate?.configChanged()
     }
 }
@@ -37,7 +38,7 @@ extension ConfigProviderViewController: UITableViewDelegate {
 // MARK: UITableViewDataSource
 extension ConfigProviderViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        PhotoHuntViewController.providerList.count
+        ProviderManager.sharedManager.providerList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -45,7 +46,7 @@ extension ConfigProviderViewController: UITableViewDataSource {
             fatalError()
         }
         
-        let provider = PhotoHuntViewController.providerList[indexPath.row]
+        let provider = ProviderManager.sharedManager.providerList[indexPath.row]
         cell.providerNameLabel.text = provider.name
         cell.onOffSwitch.isOn = provider.isOn
         cell.rowIndex = indexPath.row

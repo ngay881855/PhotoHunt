@@ -8,9 +8,7 @@
 import UIKit
 
 class OperationQueuePhotoHuntViewController: UIViewController {
-
-    // MARK: - Static vars
-    static var providerList: [Provider] = []
+    let filter: CIFilterType = .bloomFilter
     
     // MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView! {
@@ -20,7 +18,7 @@ class OperationQueuePhotoHuntViewController: UIViewController {
     }
     
     // MARK: - Private properties
-    private let cache = NSCache<NSString, UIImage>()
+    private let cache = NSCache<NSString, FilterImage>()
     private var dataSource: [Section] {
         self.accessDataQueue.sync(flags: .barrier, execute: {
             return self._dataSource
@@ -51,12 +49,8 @@ class OperationQueuePhotoHuntViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        loadDefaultData()
         setupUI()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        
+        operationQueue.maxConcurrentOperationCount = 1
     }
 
     // MARK: - Navigation
@@ -71,18 +65,9 @@ class OperationQueuePhotoHuntViewController: UIViewController {
         self.tableView.tableFooterView = UIView()
     }
     
-    private func loadDefaultData() {
-        var provider = Provider(name: Splash.name, baseUrl: Splash.baseUrl, parameters: Splash.parameters, isOn: true)
-        PhotoHuntViewController.providerList.append(provider)
-        provider = Provider(name: Pexels.name, baseUrl: Pexels.baseUrl, parameters: Pexels.parameters, header: Pexels.headers, isOn: true)
-        PhotoHuntViewController.providerList.append(provider)
-        provider = Provider(name: PixaBay.name, baseUrl: PixaBay.baseUrl, parameters: PixaBay.parameters, isOn: true)
-        PhotoHuntViewController.providerList.append(provider)
-    }
-    
     private func addQueryToProviders(_ query: String) {
-        for index in 0..<PhotoHuntViewController.providerList.count where PhotoHuntViewController.providerList[index].isOn {
-            PhotoHuntViewController.providerList[index].addQueryToParameters(with: query)
+        for index in 0..<ProviderManager.sharedManager.providerList.count where ProviderManager.sharedManager.providerList[index].isOn {
+            ProviderManager.sharedManager.providerList[index].addQueryToParameters(with: query)
         }
     }
 
@@ -118,7 +103,7 @@ class OperationQueuePhotoHuntViewController: UIViewController {
             }
             var added = false
 
-            for provider in PhotoHuntViewController.providerList where provider.isOn {
+            for provider in ProviderManager.sharedManager.providerList where provider.isOn {
                 guard let urlRequest = self.configUrlRequest(provider: provider) else { return }
 
                 let fetchDataOperation = FetchApisOperation(urlRequest: urlRequest, provider: provider)
@@ -183,24 +168,67 @@ extension OperationQueuePhotoHuntViewController: UITableViewDataSource {
             fatalError()
         }
         
+        cell.customImageView.image = #imageLiteral(resourceName: "noImage80")
+        cell.activityIndicator.startAnimating()
         if let imageUrl = self.dataSource[indexPath.section].dataSource[indexPath.row].imageUrl {
             // if image is already in the cache -> use it, otherwise download
             let cacheKey = imageUrl as NSString
-            if let image = cache.object(forKey: cacheKey) {
+            if let filterImage = cache.object(forKey: cacheKey) {
                 print("caching")
-                cell.customImageView.image = image
+                // If the filterType is different
+                if filterImage.filterType != self.filter {
+                    // Apply new filter
+                    let imageFilterOperation = ImageFilterOperation(inputImage: filterImage.image, filter: filter)
+                    operationQueue.addOperation(imageFilterOperation)
+                    
+                    imageFilterOperation.completionBlock = {
+                        print("filtering")
+                        // Add new image back to the cache
+                        if let image = imageFilterOperation.outputImage {
+                            let filteredImage = FilterImage(filterType: self.filter, image: image)
+                            OperationQueue.main.addOperation {
+                                self.cache.setObject(filteredImage, forKey: cacheKey)
+                                cell.customImageView.image = filteredImage.image
+                                cell.activityIndicator.stopAnimating()
+                            }
+                        }
+                    }
+                } else {
+                    print("caching")
+                    cell.customImageView.image = filterImage.image
+                    cell.activityIndicator.stopAnimating()
+                }
             } else {
                 let downloadImageOperation = DownloadImageOperation(url: imageUrl)
                 print("downloading")
                 operationQueue.addOperation(downloadImageOperation)
-                
+
                 downloadImageOperation.completionBlock = {
                     if let image = downloadImageOperation.contentImage {
                         OperationQueue.main.addOperation {
                             print("downloaded")
-                            // add it to cache after downloaded
-                            self.cache.setObject(image, forKey: cacheKey)
-                            cell.customImageView.image = image
+                            if self.filter != .normal {
+                                let imageFilterOperation = ImageFilterOperation(inputImage: image, filter: self.filter)
+                                self.operationQueue.addOperation(imageFilterOperation)
+
+                                imageFilterOperation.completionBlock = {
+                                    // Add new image back to the cache
+                                    if let outputImage = imageFilterOperation.outputImage {
+                                        let filteredImage = FilterImage(filterType: self.filter, image: outputImage)
+                                        OperationQueue.main.addOperation {
+                                            self.cache.setObject(filteredImage, forKey: cacheKey)
+                                            cell.customImageView.image = outputImage
+                                            cell.activityIndicator.stopAnimating()
+                                        }
+                                    }
+                                }
+                            } else {
+                                // add it to cache after downloaded
+                                let filterImage = FilterImage(filterType: .normal, image: image)
+                                self.cache.setObject(filterImage, forKey: cacheKey)
+                                cell.customImageView.image = image
+                                cell.activityIndicator.stopAnimating()
+                            }
                         }
                     }
                 }
@@ -228,6 +256,7 @@ extension OperationQueuePhotoHuntViewController: UISearchBarDelegate {
     }
 }
 
+// MARK: PassObject Delegate
 extension OperationQueuePhotoHuntViewController: PassObject {
     func configChanged() {
         if let searchText = self.searchText {

@@ -28,29 +28,59 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provider name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aar-av-cnP">
-                                                    <rect key="frame" x="20" y="37" width="207" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8CG-Kc-bve">
-                                                    <rect key="frame" x="325" y="32" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="onOffSwitchValueChanged:" destination="Nhl-XU-pDY" eventType="valueChanged" id="nxQ-1O-DnN"/>
-                                                    </connections>
-                                                </switch>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aGg-d5-q9B">
+                                                    <rect key="frame" x="20" y="11" width="374" height="73"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tzB-qW-Yua">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="31"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provider name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aar-av-cnP">
+                                                                    <rect key="frame" x="0.0" y="5.5" width="110" height="20.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8CG-Kc-bve">
+                                                                    <rect key="frame" x="325" y="0.0" width="51" height="31"/>
+                                                                    <connections>
+                                                                        <action selector="onOffSwitchValueChanged:" destination="Nhl-XU-pDY" eventType="valueChanged" id="nxQ-1O-DnN"/>
+                                                                    </connections>
+                                                                </switch>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xWT-kx-Lx2">
+                                                            <rect key="frame" x="0.0" y="31" width="374" height="42"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQy-Q9-d1y">
+                                                                    <rect key="frame" x="0.0" y="11" width="38" height="20.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SVF-eD-BWf">
+                                                                    <rect key="frame" x="54" y="0.0" width="320" height="42"/>
+                                                                    <connections>
+                                                                        <outlet property="dataSource" destination="78d-pQ-t48" id="gx6-os-6pU"/>
+                                                                        <outlet property="delegate" destination="78d-pQ-t48" id="tfb-Jg-G7C"/>
+                                                                    </connections>
+                                                                </pickerView>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="xWT-kx-Lx2" firstAttribute="top" secondItem="aGg-d5-q9B" secondAttribute="top" constant="31" id="oAl-Ja-q8P"/>
+                                                    </constraints>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="8CG-Kc-bve" firstAttribute="leading" relation="lessThanOrEqual" secondItem="aar-av-cnP" secondAttribute="trailing" constant="105" id="1bq-Xl-QuE"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="8CG-Kc-bve" secondAttribute="trailing" constant="20" id="78e-93-gzH"/>
-                                                <constraint firstItem="aar-av-cnP" firstAttribute="leading" secondItem="e9e-Pw-pA9" secondAttribute="leading" constant="20" id="E2A-Tf-pZa"/>
-                                                <constraint firstItem="aar-av-cnP" firstAttribute="centerY" secondItem="e9e-Pw-pA9" secondAttribute="centerY" id="FbN-rl-O46"/>
-                                                <constraint firstItem="8CG-Kc-bve" firstAttribute="centerY" secondItem="e9e-Pw-pA9" secondAttribute="centerY" id="aKx-5T-UhG"/>
-                                                <constraint firstItem="aar-av-cnP" firstAttribute="width" secondItem="e9e-Pw-pA9" secondAttribute="width" multiplier="1:2" id="gdP-Wp-SXZ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="aGg-d5-q9B" secondAttribute="bottom" id="Kvp-Hw-exF"/>
+                                                <constraint firstItem="aGg-d5-q9B" firstAttribute="leading" secondItem="e9e-Pw-pA9" secondAttribute="leadingMargin" id="a9h-c7-T7I"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="aGg-d5-q9B" secondAttribute="trailing" id="opn-0y-h7P"/>
+                                                <constraint firstItem="aGg-d5-q9B" firstAttribute="top" secondItem="e9e-Pw-pA9" secondAttribute="topMargin" id="rRv-vK-Emo"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="filterPickerView" destination="SVF-eD-BWf" id="JsA-4f-LcU"/>
                                             <outlet property="onOffSwitch" destination="8CG-Kc-bve" id="roE-qM-7tq"/>
                                             <outlet property="providerNameLabel" destination="aar-av-cnP" id="xNO-Lz-tSZ"/>
                                         </connections>
@@ -88,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTA-5v-r2B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1117" y="-780"/>
+            <point key="canvasLocation" x="1277" y="-439"/>
         </scene>
         <!--Operation Queue-->
         <scene sceneID="7ET-uL-cbS">
@@ -270,6 +300,10 @@
                                                         <constraint firstAttribute="height" constant="145" id="RdF-h0-iR7"/>
                                                     </constraints>
                                                 </imageView>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Sx3-sl-b9a">
+                                                    <rect key="frame" x="189" y="106" width="37" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="FFH-Xd-an5" firstAttribute="leading" secondItem="Bc6-Jq-HpF" secondAttribute="leadingMargin" constant="10" id="3GP-OO-8Pb"/>
@@ -279,6 +313,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="Sx3-sl-b9a" id="dqZ-jD-QVb"/>
                                             <outlet property="customImageView" destination="FFH-Xd-an5" id="AYm-yh-GdG"/>
                                         </connections>
                                     </tableViewCell>
@@ -306,7 +341,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Photo Hunt" id="41Q-LX-2ga"/>
                     <navigationItem key="navigationItem" id="cZI-7g-bTC">
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="Qao-vA-IBq"/>
+                        <barButtonItem key="rightBarButtonItem" title="Filter" id="Qao-vA-IBq">
+                            <connections>
+                                <segue destination="78d-pQ-t48" kind="show" id="bbm-qG-pBm"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="HHz-Y0-93h" id="UL1-gJ-xHW"/>
@@ -317,6 +356,9 @@
             <point key="canvasLocation" x="338" y="-100"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="bbm-qG-pBm"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

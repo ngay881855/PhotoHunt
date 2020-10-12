@@ -11,6 +11,7 @@ class ProviderTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
     @IBOutlet weak var providerNameLabel: UILabel!
     @IBOutlet weak var onOffSwitch: UISwitch!
+    @IBOutlet weak var filterPickerView: UIPickerView!
     
     // MARK: - Public properties
     var rowIndex: Int = 0
@@ -25,12 +26,13 @@ class ProviderTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        self.filterPickerView.dataSource = 
     }
 
     @IBAction func onOffSwitchValueChanged(_ sender: Any) {
-        PhotoHuntViewController.providerList[rowIndex].isOn = onOffSwitch.isOn
+        ProviderManager.sharedManager.providerList[rowIndex].isOn = onOffSwitch.isOn
         if !canSwitch() {
-            PhotoHuntViewController.providerList[rowIndex].isOn = true
+            ProviderManager.sharedManager.providerList[rowIndex].isOn = true
             onOffSwitch.isOn = !onOffSwitch.isOn
             
             let alert = UIAlertController(title: "Invalid Action", message: "At least one provider has to be on", preferredStyle: .alert)
@@ -41,7 +43,7 @@ class ProviderTableViewCell: UITableViewCell {
     
     private func canSwitch() -> Bool {
         // Check all items in providerList, if found one is ON -> can switch
-        for provider in PhotoHuntViewController.providerList where provider.isOn {
+        for provider in ProviderManager.sharedManager.providerList where provider.isOn {
                 return true
             }
         // If all are off -> can't switch

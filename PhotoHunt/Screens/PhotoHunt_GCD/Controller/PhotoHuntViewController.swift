@@ -9,9 +9,6 @@ import UIKit
 
 class PhotoHuntViewController: UIViewController {
 
-    // MARK: - Static vars
-    static var providerList: [Provider] = []
-    
     // MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
@@ -39,7 +36,6 @@ class PhotoHuntViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        loadProviderData()
         setupUI()
     }
 
@@ -53,15 +49,6 @@ class PhotoHuntViewController: UIViewController {
     // MARK: - UISetup/Helpers/Actions
     private func setupUI() {
         self.tableView.tableFooterView = UIView()
-    }
-    
-    private func loadProviderData() {
-        var provider = Provider(name: Splash.name, baseUrl: Splash.baseUrl, parameters: Splash.parameters, isOn: true)
-        PhotoHuntViewController.providerList.append(provider)
-        provider = Provider(name: Pexels.name, baseUrl: Pexels.baseUrl, parameters: Pexels.parameters, header: Pexels.headers, isOn: true)
-        PhotoHuntViewController.providerList.append(provider)
-        provider = Provider(name: PixaBay.name, baseUrl: PixaBay.baseUrl, parameters: PixaBay.parameters, isOn: true)
-        PhotoHuntViewController.providerList.append(provider)
     }
     
     private func downloadData(withURLRequest urlRequest: URLRequest, provider: Provider, completion: @escaping () -> Void) {
@@ -114,8 +101,8 @@ class PhotoHuntViewController: UIViewController {
     }
     
     private func addQueryToProviders(_ query: String) {
-        for index in 0..<PhotoHuntViewController.providerList.count where PhotoHuntViewController.providerList[index].isOn {
-            PhotoHuntViewController.providerList[index].addQueryToParameters(with: query)
+        for index in 0..<ProviderManager.sharedManager.providerList.count where ProviderManager.sharedManager.providerList[index].isOn {
+            ProviderManager.sharedManager.providerList[index].addQueryToParameters(with: query)
         }
     }
 
@@ -146,7 +133,7 @@ class PhotoHuntViewController: UIViewController {
                 self._dataSource.removeAll()
 
                 let dispatchGroup: DispatchGroup = DispatchGroup()
-                for provider in PhotoHuntViewController.providerList where provider.isOn {
+                for provider in ProviderManager.sharedManager.providerList where provider.isOn {
                     dispatchGroup.enter()
                     DispatchQueue.global().async {
                         guard let urlRequest = self.configUrlRequest(provider: provider) else { dispatchGroup.leave(); return }

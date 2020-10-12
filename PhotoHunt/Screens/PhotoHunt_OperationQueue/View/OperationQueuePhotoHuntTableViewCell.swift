@@ -11,6 +11,7 @@ class OperationQueuePhotoHuntTableViewCell: UITableViewCell {
     
     // MARK: - IBOutlets
     @IBOutlet weak var customImageView: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Private properties
     override func awakeFromNib() {
