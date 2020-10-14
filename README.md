@@ -10,7 +10,7 @@ brew install swiftlint
 ```
 
 ## Capabilities
-- Search for images using GCD and Operation Queue
+- Search for images using GCD and Operation Queue separately
 - Search for images using 3 different APIs
 - Apply a filter to select the API to search from
 - At least one API will always on
