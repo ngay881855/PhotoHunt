@@ -18,8 +18,10 @@ class OperationQueuePhotoHuntViewController: UIViewController {
     
     // MARK: - Private properties
     private let cache = NSCache<NSString, FilterImage>()
+    
+    private var _dataSource: [Section] = []
     private var dataSource: [Section] {
-        self.accessDataQueue.sync(flags: .barrier, execute: {
+        self.accessDataQueue.sync( execute: {
             return self._dataSource
         })
 
@@ -36,7 +38,13 @@ class OperationQueuePhotoHuntViewController: UIViewController {
 //        }
     }
     
-    private var _dataSource: [Section] = []
+    private var _downloadsInProgress: [IndexPath: Operation] = [:]
+    private var downloadsInProgress: [IndexPath: Operation] {
+        self.accessDataQueue.sync {
+            return self._downloadsInProgress
+        }
+    }
+    
     private var accessDataQueue: DispatchQueue = DispatchQueue(label: "com.photohunt.accessDataQueue", attributes: .concurrent)
     private let operationQueue = OperationQueue()
     private var searchDispatchWorkItem: DispatchWorkItem?
@@ -149,7 +157,7 @@ extension OperationQueuePhotoHuntViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.dataSource[section].provider.name
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         self.dataSource.count
     }
@@ -157,27 +165,42 @@ extension OperationQueuePhotoHuntViewController: UITableViewDelegate {
     // MARK: - UIScrollView Delegate methods
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-      suspendAllOperations()
+        suspendAllOperations()
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-      if !decelerate {
+        cancelInvisiblePaths()
         resumeAllOperations()
-      }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-      resumeAllOperations()
+        cancelInvisiblePaths()
+        resumeAllOperations()
     }
     
     // MARK: - operation management
     
     func suspendAllOperations() {
-      operationQueue.isSuspended = true
+        operationQueue.isSuspended = true
     }
     
     func resumeAllOperations() {
         operationQueue.isSuspended = false
+    }
+    
+    private func cancelInvisiblePaths() {
+        if let visiblePaths = tableView.indexPathsForVisibleRows {
+            var allPendingPaths = Set(_downloadsInProgress.keys)
+            let visiblePaths = Set(visiblePaths)
+            
+            allPendingPaths.subtract(visiblePaths)
+            
+            for indexPath in allPendingPaths {
+                if let operation = _downloadsInProgress[indexPath] {
+                    operation.cancel()
+                }
+            }
+        }
     }
 }
 
@@ -199,7 +222,6 @@ extension OperationQueuePhotoHuntViewController: UITableViewDataSource {
             let cacheKey = imageUrl as NSString
             let filter = self.dataSource[indexPath.section].provider.imageFilterType.cIFilterType
             if let filterImage = cache.object(forKey: cacheKey) {
-                print("caching")
                 // If the filterType is different
                 if filterImage.filterType != filter {
                     // Apply new filter
@@ -207,7 +229,6 @@ extension OperationQueuePhotoHuntViewController: UITableViewDataSource {
                     operationQueue.addOperation(imageFilterOperation)
                     
                     imageFilterOperation.completionBlock = {
-                        print("filtering")
                         // Add new image back to the cache
                         if let image = imageFilterOperation.outputImage {
                             let filteredImage = FilterImage(filterType: filter, image: image)
@@ -219,19 +240,21 @@ extension OperationQueuePhotoHuntViewController: UITableViewDataSource {
                         }
                     }
                 } else {
-                    print("caching")
                     cell.customImageView.image = filterImage.image
                     cell.activityIndicator.stopAnimating()
                 }
             } else {
                 let downloadImageOperation = DownloadImageOperation(url: imageUrl)
-                print("downloading")
+                _downloadsInProgress[indexPath] = downloadImageOperation
                 operationQueue.addOperation(downloadImageOperation)
 
                 downloadImageOperation.completionBlock = {
+                    self.accessDataQueue.async(flags: .barrier, execute: {
+                        self._downloadsInProgress[indexPath] = nil
+                    })
+                    
                     if let image = downloadImageOperation.contentImage {
                         OperationQueue.main.addOperation {
-                            print("downloaded")
                             if filter != .normal {
                                 let imageFilterOperation = ImageFilterOperation(inputImage: image, filter: filter)
                                 self.operationQueue.addOperation(imageFilterOperation)
@@ -243,9 +266,10 @@ extension OperationQueuePhotoHuntViewController: UITableViewDataSource {
                                         OperationQueue.main.addOperation {
                                             self.cache.setObject(filteredImage, forKey: cacheKey)
                                             cell.customImageView.image = outputImage
-                                            cell.activityIndicator.stopAnimating()
                                         }
                                     }
+                                    
+                                    cell.activityIndicator.stopAnimating()
                                 }
                             } else {
                                 // add it to cache after downloaded
@@ -255,6 +279,8 @@ extension OperationQueuePhotoHuntViewController: UITableViewDataSource {
                                 cell.activityIndicator.stopAnimating()
                             }
                         }
+                    } else {
+                        cell.activityIndicator.stopAnimating()
                     }
                 }
             }
@@ -287,7 +313,7 @@ extension OperationQueuePhotoHuntViewController: PassObject {
         if let searchText = self.searchText {
             searchData(with: searchText)
         }
-        
+
         self.tableView.reloadData()
     }
 }

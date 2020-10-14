@@ -26,13 +26,27 @@ class DownloadImageOperation: Operation {
         }
     }
     
+    private var _isCancelled: Bool = false
+    override var isCancelled: Bool {
+        get {
+            return self._isCancelled
+        }
+        set {
+            if self._isCancelled != newValue {
+                willChangeValue(forKey: "isCancelled")
+                self._isCancelled = newValue
+                didChangeValue(forKey: "isCancelled")
+            }
+        }
+    }
+    
     init(url: String) {
         self.url = url
     }
     
     override func start() {
         if isCancelled {
-            print("return")
+            print("DownloadImageOperation isCancelled")
             return
         }
         
@@ -41,7 +55,7 @@ class DownloadImageOperation: Operation {
             let data = try Data(contentsOf: url)
             
             if isCancelled {
-                print("return")
+                print("DownloadImageOperation isCancelled")
                 return
             }
             guard let image = UIImage(data: data) else { return }
@@ -49,7 +63,12 @@ class DownloadImageOperation: Operation {
             isFinished = true
         } catch {
             print(error)
+            self.isCancelled = true
             return
         }
+    }
+    
+    override func cancel() {
+        self.isCancelled = true
     }
 }

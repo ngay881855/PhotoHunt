@@ -48,6 +48,7 @@ class ImageFilterOperation: Operation {
     
     override func start() {
         if isCancelled {
+            print("ImageFilterOperation isCancelled")
             return
         }
         let cIInputImage = CIImage(image: self.inputImage)
@@ -75,6 +76,14 @@ class ImageFilterOperation: Operation {
         if let cgImage = ContextManager.sharedManager.context.createCGImage(ciImage, from: ciImage.extent) {
             self.outputImage = UIImage(cgImage: cgImage)
         }
+        if isCancelled {
+            print("ImageFilterOperation isCancelled")
+            return
+        }
         isFinished = true
+    }
+    
+    override func cancel() {
+        self.isCancelled = true
     }
 }

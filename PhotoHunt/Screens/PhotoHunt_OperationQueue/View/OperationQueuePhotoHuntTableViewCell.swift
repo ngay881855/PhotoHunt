@@ -25,7 +25,12 @@ class OperationQueuePhotoHuntTableViewCell: UITableViewCell {
         // Configure the view for the selected state
         self.selectionStyle = .none
     }
-
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.customImageView.image = nil
+    }
+    
     func configureData(with imageURL: String) {
         guard let url = URL(string: imageURL) else { return }
         customImageView.downloadImage(with: url)

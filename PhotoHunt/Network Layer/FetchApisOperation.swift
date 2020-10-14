@@ -23,7 +23,7 @@ class FetchApisOperation: Operation {
             return self._isFinished
         }
         set {
-            if _isFinished != newValue {
+            if self._isFinished != newValue {
                 willChangeValue(forKey: "isFinished")
                 self._isFinished = newValue
                 didChangeValue(forKey: "isFinished")
@@ -31,9 +31,23 @@ class FetchApisOperation: Operation {
         }
     }
     
+    private var _isCancelled: Bool = false
+    override var isCancelled: Bool {
+        get {
+            return self._isCancelled
+        }
+        set {
+            if self._isCancelled != newValue {
+                willChangeValue(forKey: "isCancelled")
+                self._isCancelled = newValue
+                didChangeValue(forKey: "isCancelled")
+            }
+        }
+    }
+    
     override func start() {
         if isCancelled {
-            print("return")
+            print("FetchApisOperation isCancelled")
             return
         }
         
@@ -42,44 +56,57 @@ class FetchApisOperation: Operation {
                 if let error = error {
                     print(error)
                 }
+                self.isCancelled = true
                 return
             }
-            do {
-                let responseObj = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                guard let dictionary = responseObj as? [String: Any] else { return }
-                var newSection: [ImageProtocol] = []
-                switch self.provider.name {
-                case Splash.name:
-                    guard let arrayItems = dictionary["images"] as? [[String: Any]], !arrayItems.isEmpty else { return }
-                    arrayItems.forEach { dictionary in
-                        newSection.append(SplashImageInfo(dict: dictionary))
-                    }
-                case Pexels.name:
-                    guard let arrayItems = dictionary["photos"] as? [[String: Any]], !arrayItems.isEmpty else { return }
-                    arrayItems.forEach { dictionary in
-                        newSection.append(PexelsImageInfo(dict: dictionary))
-                    }
-                case PixaBay.name:
-                    guard let arrayItems = dictionary["hits"] as? [[String: Any]], !arrayItems.isEmpty else { return }
-                    arrayItems.forEach { dictionary in
-                        newSection.append(PixabayImageInfo(dict: dictionary))
-                    }
-                default:
-                    break
-                }
-                if newSection.count > 0 {
-                    self.section = Section(provider: self.provider, dataSource: newSection)
-                }
-                self.isFinished = true
-            } catch {
-                print(error)
+            
+            if self.isCancelled {
+                print("FetchApisOperation isCancelled")
                 return
             }
+            
+            self.section = self.convertDataToSection(data: data, provider: self.provider)
+            self.isFinished = true
         }
         
         if isCancelled {
-            print("return")
+            print("FetchApisOperation isCancelled")
             return
+        }
+    }
+    
+    private func convertDataToSection(data: Data, provider: Provider) -> Section? {
+        do {
+            let responseObj = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            guard let dictionary = responseObj as? [String: Any] else { return nil}
+            var newSection: [ImageProtocol] = []
+            switch self.provider.name {
+            case Splash.name:
+                guard let arrayItems = dictionary["images"] as? [[String: Any]], !arrayItems.isEmpty else { return nil}
+                arrayItems.forEach { dictionary in
+                    newSection.append(SplashImageInfo(dict: dictionary))
+                }
+            case Pexels.name:
+                guard let arrayItems = dictionary["photos"] as? [[String: Any]], !arrayItems.isEmpty else { return nil }
+                arrayItems.forEach { dictionary in
+                    newSection.append(PexelsImageInfo(dict: dictionary))
+                }
+            case PixaBay.name:
+                guard let arrayItems = dictionary["hits"] as? [[String: Any]], !arrayItems.isEmpty else { return nil }
+                arrayItems.forEach { dictionary in
+                    newSection.append(PixabayImageInfo(dict: dictionary))
+                }
+            default:
+                break
+            }
+            if newSection.count > 0 {
+                return Section(provider: self.provider, dataSource: newSection)
+            } else {
+                return nil
+            }
+        } catch {
+            print(error)
+            return nil
         }
     }
 }
