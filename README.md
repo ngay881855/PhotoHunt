@@ -1,18 +1,16 @@
 # PhotoHunt
-A small app to search for images from different image providers
+A small app to search for images from different image providers by utilizing multithreading for better user experience
 
 ## Forking the code
-- Before compiling the code, make sure you have CocoaPods installed
-### Using [CocoaPods](https://cocoapods.org):
+- Before compiling the code, make sure you have SwiftLint installed on your local machine
+### Using [Homebrew](http://brew.sh/):
 
-   Simply run these commands in terminal in the project root directory:
-
-   ```ruby
-   pod deintegrate
-   pod install
-   ```
+```
+brew install swiftlint
+```
 
 ## Capabilities
+- Search for images using GCD and Operation Queue
 - Search for images using 3 different APIs
 - Apply a filter to select the API to search from
 - At least one API will always on
@@ -22,8 +20,11 @@ A small app to search for images from different image providers
    - DispatchQueue
    - DispatchWorkItem
    - Custom DispatchQueue
+   - OperationQueue
+   - Operation
 - URLSession: using URLComponents and URLQueryItem to create URLRequest with dynamic parameters and headers
 - Delegation
+- Image filtering using built-in filters
 - SwiftLint is enabled to ensure clean code
 
 ## Images
