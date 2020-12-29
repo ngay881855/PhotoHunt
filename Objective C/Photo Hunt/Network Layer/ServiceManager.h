@@ -9,7 +9,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ServiceManager : NSObject
+@protocol ServiceManagerProtocol <NSObject>
+
+- (void)request: (NSURLRequest *) urlRequest withSuccessHandler: (void(^)(NSData *data))successHandler failureHandler: (void(^)(NSError *error))errorHandler;
+
+@end
+
+@interface ServiceManager : NSObject <ServiceManagerProtocol>
+
 @end
 
 NS_ASSUME_NONNULL_END

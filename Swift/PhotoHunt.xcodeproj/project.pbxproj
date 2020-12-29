@@ -33,6 +33,7 @@
 		FFC477572527B35200A7B7EF /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC477562527B35200A7B7EF /* UIImageView+Ext.swift */; };
 		FFC477632527DD5700A7B7EF /* PhotoHuntTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC477622527DD5700A7B7EF /* PhotoHuntTableViewCell.swift */; };
 		FFDA898C252ACC9E00A4BDC6 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDA898B252ACC9E00A4BDC6 /* ServiceManager.swift */; };
+		FFF0EC492568312800A39DDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFF0EC482568312800A39DDB /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		FFC477562527B35200A7B7EF /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		FFC477622527DD5700A7B7EF /* PhotoHuntTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHuntTableViewCell.swift; sourceTree = "<group>"; };
 		FFDA898B252ACC9E00A4BDC6 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		FFF0EC482568312800A39DDB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFF0EC492568312800A39DDB /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +186,7 @@
 			children = (
 				FFC4771D25278A1700A7B7EF /* PhotoHunt */,
 				FFC4771C25278A1700A7B7EF /* Products */,
+				FFF0EC472568312800A39DDB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,6 +289,14 @@
 				FF0729B5252E204200EE15A7 /* DownloadImageOperation.swift */,
 			);
 			path = "Network Layer";
+			sourceTree = "<group>";
+		};
+		FFF0EC472568312800A39DDB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FFF0EC482568312800A39DDB /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

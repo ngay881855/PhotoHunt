@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF45E5B0259BCFCE007078E5 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF45E5AF259BCFCE007078E5 /* ServiceManager.swift */; };
+		FF5117492562D56D00B710B1 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5117482562D56D00B710B1 /* Provider.m */; };
+		FF51174F2562D89800B710B1 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = FF51174E2562D89800B710B1 /* Constants.m */; };
 		FF6753D6255F59C000C8BD20 /* ServiceError.m in Sources */ = {isa = PBXBuildFile; fileRef = FF6753D5255F59C000C8BD20 /* ServiceError.m */; };
 		FF6753DA255F5A7400C8BD20 /* ServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FF6753D9255F5A7400C8BD20 /* ServiceManager.m */; };
 		FF95251E255EE1640010B113 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF95251D255EE1640010B113 /* AppDelegate.m */; };
@@ -20,6 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF45E5AE259BCFCD007078E5 /* Photo Hunt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Photo Hunt-Bridging-Header.h"; sourceTree = "<group>"; };
+		FF45E5AF259BCFCE007078E5 /* ServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceManager.swift; path = "../../../Swift/PhotoHunt/Network Layer/ServiceManager.swift"; sourceTree = "<group>"; };
+		FF5117472562D56D00B710B1 /* Provider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Provider.h; sourceTree = "<group>"; };
+		FF5117482562D56D00B710B1 /* Provider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Provider.m; sourceTree = "<group>"; };
+		FF51174D2562D89800B710B1 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		FF51174E2562D89800B710B1 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		FF6753D4255F59C000C8BD20 /* ServiceError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceError.h; sourceTree = "<group>"; };
 		FF6753D5255F59C000C8BD20 /* ServiceError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceError.m; sourceTree = "<group>"; };
 		FF6753D8255F5A7400C8BD20 /* ServiceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceManager.h; sourceTree = "<group>"; };
@@ -50,6 +59,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF5117422562D4FE00B710B1 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				FF5117432562D50900B710B1 /* SearchPhoto_GCD */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		FF5117432562D50900B710B1 /* SearchPhoto_GCD */ = {
+			isa = PBXGroup;
+			children = (
+				FF5117462562D53000B710B1 /* Model */,
+				FF5117452562D52A00B710B1 /* View */,
+				FF5117442562D51A00B710B1 /* ViewModel */,
+			);
+			path = SearchPhoto_GCD;
+			sourceTree = "<group>";
+		};
+		FF5117442562D51A00B710B1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FF5117452562D52A00B710B1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FF5117462562D53000B710B1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FF5117472562D56D00B710B1 /* Provider.h */,
+				FF5117482562D56D00B710B1 /* Provider.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FF51174C2562D87300B710B1 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				FF5117512562DFBE00B710B1 /* Constants */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		FF5117512562DFBE00B710B1 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				FF51174D2562D89800B710B1 /* Constants.h */,
+				FF51174E2562D89800B710B1 /* Constants.m */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		FF6753CD255F527F00C8BD20 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +146,8 @@
 				FF6753D5255F59C000C8BD20 /* ServiceError.m */,
 				FF6753D8255F5A7400C8BD20 /* ServiceManager.h */,
 				FF6753D9255F5A7400C8BD20 /* ServiceManager.m */,
+				FF45E5AF259BCFCE007078E5 /* ServiceManager.swift */,
+				FF45E5AE259BCFCD007078E5 /* Photo Hunt-Bridging-Header.h */,
 			);
 			path = "Network Layer";
 			sourceTree = "<group>";
@@ -102,6 +171,8 @@
 		FF95251B255EE1640010B113 /* Photo Hunt */ = {
 			isa = PBXGroup;
 			children = (
+				FF51174C2562D87300B710B1 /* Utilities */,
+				FF5117422562D4FE00B710B1 /* Screens */,
 				FF6753D2255F58FA00C8BD20 /* Network Layer */,
 				FF6753CE255F52BC00C8BD20 /* Support Files */,
 				FF6753CD255F527F00C8BD20 /* Storyboards */,
@@ -143,6 +214,7 @@
 				TargetAttributes = {
 					FF952518255EE1640010B113 = {
 						CreatedOnToolsVersion = 12.1;
+						LastSwiftMigration = 1230;
 					};
 				};
 			};
@@ -182,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF5117492562D56D00B710B1 /* Provider.m in Sources */,
 				FF952532255EE1650010B113 /* main.m in Sources */,
 				FF952524255EE1640010B113 /* ViewController.m in Sources */,
 				FF95251E255EE1640010B113 /* AppDelegate.m in Sources */,
@@ -189,6 +262,8 @@
 				FF6753D6255F59C000C8BD20 /* ServiceError.m in Sources */,
 				FF6753DA255F5A7400C8BD20 /* ServiceManager.m in Sources */,
 				FF95252A255EE1640010B113 /* Photo_Hunt.xcdatamodeld in Sources */,
+				FF51174F2562D89800B710B1 /* Constants.m in Sources */,
+				FF45E5B0259BCFCE007078E5 /* ServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,7 +406,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = FFM24X5V87;
 				INFOPLIST_FILE = "Photo Hunt/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -340,6 +417,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "co.ngayvong.Photo-Hunt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Photo Hunt/Network Layer/Photo Hunt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -349,7 +429,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = FFM24X5V87;
 				INFOPLIST_FILE = "Photo Hunt/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -358,6 +440,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "co.ngayvong.Photo-Hunt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Photo Hunt/Network Layer/Photo Hunt-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
