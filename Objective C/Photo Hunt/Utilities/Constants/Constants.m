@@ -16,5 +16,4 @@ const NSInteger providerID = 1;
 const NSString * query = @"query";
 const NSString * name = @"Splash";
 const NSString * baseUrl = @"http://www.splashbase.co/api/v1/images/search";
-//const NSDictionary *parameters = @{query: @"1" }; - @@@@!
 @end

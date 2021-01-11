@@ -14,7 +14,6 @@ extern const NSInteger providerID;
 extern const NSString *query;
 extern const NSString *name;
 extern const NSString *baseUrl;
-extern const NSDictionary<NSString *, NSString *> *parameters;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -20,7 +20,7 @@ import Foundation
             
             completed(data, nil)
             return
-        } // can do .resume() directly
+        }
         task.resume() // calls the service
     }
 }

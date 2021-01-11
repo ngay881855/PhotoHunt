@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableDictionary *header;
 @property (nonatomic) BOOL *isOn;
 
+- (instancetype)
 - (void) addQueryToParameters: (NSString *)query;
 
 @end

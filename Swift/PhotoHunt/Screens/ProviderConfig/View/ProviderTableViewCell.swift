@@ -11,7 +11,7 @@ class ProviderTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
     @IBOutlet weak var providerNameLabel: UILabel!
     @IBOutlet weak var onOffSwitch: UISwitch!
-    @IBOutlet weak var filterPickerView: UIPickerView!
+    @IBOutlet weak private var filterPickerView: UIPickerView!
     
     // MARK: - Public properties
     var rowIndex: Int = 0
