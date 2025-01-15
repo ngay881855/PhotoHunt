@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:Objective C"
+      name = "Objective C">
+      <FileRef
+         location = "group:Photo Hunt.xcodeproj">
+      </FileRef>
+      <Group
+         location = "group:Photo Hunt"
+         name = "Photo Hunt">
+         <Group
+            location = "group:Storyboards"
+            name = "Storyboards">
+            <Group
+               location = "group:Base.lproj"
+               name = "Base.lproj">
+               <FileRef
+                  location = "group:LaunchScreen.storyboard">
+               </FileRef>
+               <FileRef
+                  location = "group:Main.storyboard">
+               </FileRef>
+            </Group>
+         </Group>
+         <Group
+            location = "group:Support Files"
+            name = "Support Files">
+            <FileRef
+               location = "group:AppDelegate.h">
+            </FileRef>
+            <FileRef
+               location = "group:Assets.xcassets">
+            </FileRef>
+            <FileRef
+               location = "group:SceneDelegate.m">
+            </FileRef>
+            <FileRef
+               location = "group:AppDelegate.m">
+            </FileRef>
+            <FileRef
+               location = "group:Info.plist">
+            </FileRef>
+            <FileRef
+               location = "group:SceneDelegate.h">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:ViewController.m">
+         </FileRef>
+         <Group
+            location = "group:Screens"
+            name = "Screens">
+            <Group
+               location = "group:SearchPhoto_GCD"
+               name = "SearchPhoto_GCD">
+               <Group
+                  location = "group:Model"
+                  name = "Model">
+                  <FileRef
+                     location = "group:Provider.m">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Provider.h">
+                  </FileRef>
+               </Group>
+            </Group>
+         </Group>
+         <Group
+            location = "group:Network Layer"
+            name = "Network Layer">
+            <FileRef
+               location = "group:Photo Hunt-Bridging-Header.h">
+            </FileRef>
+            <FileRef
+               location = "group:ServiceManager.m">
+            </FileRef>
+            <FileRef
+               location = "group:ServiceError.h">
+            </FileRef>
+            <FileRef
+               location = "group:ServiceManager.h">
+            </FileRef>
+            <FileRef
+               location = "group:ServiceError.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:Utilities"
+            name = "Utilities">
+            <Group
+               location = "group:Constants"
+               name = "Constants">
+               <FileRef
+                  location = "group:Constants.m">
+               </FileRef>
+               <FileRef
+                  location = "group:Constants.h">
+               </FileRef>
+            </Group>
+         </Group>
+         <FileRef
+            location = "group:main.m">
+         </FileRef>
+         <Group
+            location = "group:Photo Hunt"
+            name = "Photo Hunt">
+            <FileRef
+               location = "group:AppDelegate.h">
+            </FileRef>
+            <FileRef
+               location = "group:Assets.xcassets">
+            </FileRef>
+            <FileRef
+               location = "group:ViewController.m">
+            </FileRef>
+            <FileRef
+               location = "group:SceneDelegate.m">
+            </FileRef>
+            <FileRef
+               location = "group:main.m">
+            </FileRef>
+            <FileRef
+               location = "group:AppDelegate.m">
+            </FileRef>
+            <FileRef
+               location = "group:Photo_Hunt.xcdatamodeld">
+            </FileRef>
+            <FileRef
+               location = "group:Info.plist">
+            </FileRef>
+            <FileRef
+               location = "group:ViewController.h">
+            </FileRef>
+            <FileRef
+               location = "group:SceneDelegate.h">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:Photo_Hunt.xcdatamodeld">
+         </FileRef>
+         <FileRef
+            location = "group:ViewController.h">
+         </FileRef>
+      </Group>
+   </Group>
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <FileSystemSynchronizedGroup
+      location = "group:SwiftUI"
+      name = "SwiftUI">
+   </FileSystemSynchronizedGroup>
+   <Group
+      location = "group:Swift"
+      name = "Swift">
+      <FileRef
+         location = "group:PhotoHunt.xcodeproj">
+      </FileRef>
+      <Group
+         location = "group:PhotoHunt"
+         name = "PhotoHunt">
+         <Group
+            location = "group:Storyboards"
+            name = "Storyboards">
+            <Group
+               location = "group:Base.lproj"
+               name = "Base.lproj">
+               <FileRef
+                  location = "group:LaunchScreen.storyboard">
+               </FileRef>
+               <FileRef
+                  location = "group:Main.storyboard">
+               </FileRef>
+            </Group>
+         </Group>
+         <FileRef
+            location = "group:Assets.xcassets">
+         </FileRef>
+         <Group
+            location = "group:Support Files"
+            name = "Support Files">
+            <FileRef
+               location = "group:AppDelegate.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Info.plist">
+            </FileRef>
+            <FileRef
+               location = "group:SceneDelegate.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:Screens"
+            name = "Screens">
+            <Group
+               location = "group:ProviderConfig"
+               name = "ProviderConfig">
+               <Group
+                  location = "group:Controller"
+                  name = "Controller">
+                  <FileRef
+                     location = "group:ConfigProviderViewController.swift">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:View"
+                  name = "View">
+                  <FileRef
+                     location = "group:ProviderTableViewCell.swift">
+                  </FileRef>
+               </Group>
+            </Group>
+            <Group
+               location = "group:PhotoHunt_OperationQueue"
+               name = "PhotoHunt_OperationQueue">
+               <Group
+                  location = "group:Controller"
+                  name = "Controller">
+                  <FileRef
+                     location = "group:OperationQueuePhotoHuntViewController.swift">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:View"
+                  name = "View">
+                  <FileRef
+                     location = "group:OperationQueuePhotoHuntTableViewCell.swift">
+                  </FileRef>
+               </Group>
+            </Group>
+            <Group
+               location = "group:EditPhoto"
+               name = "EditPhoto">
+               <Group
+                  location = "group:Model"
+                  name = "Model">
+                  <FileRef
+                     location = "group:FilterImage.swift">
+                  </FileRef>
+                  <FileRef
+                     location = "group:CIFilterType.swift">
+                  </FileRef>
+               </Group>
+            </Group>
+            <Group
+               location = "group:PhotoHunt_GCD"
+               name = "PhotoHunt_GCD">
+               <Group
+                  location = "group:Controller"
+                  name = "Controller">
+                  <FileRef
+                     location = "group:PhotoHuntViewController.swift">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:Model"
+                  name = "Model">
+                  <FileRef
+                     location = "group:Provider.swift">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Section.swift">
+                  </FileRef>
+                  <FileRef
+                     location = "group:DataSource.swift">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:View"
+                  name = "View">
+                  <FileRef
+                     location = "group:PhotoHuntTableViewCell.swift">
+                  </FileRef>
+               </Group>
+            </Group>
+         </Group>
+         <Group
+            location = "group:Network Layer"
+            name = "Network Layer">
+            <FileRef
+               location = "group:DownloadImageOperation.swift">
+            </FileRef>
+            <FileRef
+               location = "group:FetchApisOperation.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ServiceManager.swift">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:Utilities"
+            name = "Utilities">
+            <FileRef
+               location = "group:Constants.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ContextManager.swift">
+            </FileRef>
+            <FileRef
+               location = "group:UIImageView+Ext.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ImageFilterType.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ImageFilterOperation.swift">
+            </FileRef>
+            <FileRef
+               location = "group:Protocols.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ProviderManager.swift">
+            </FileRef>
+         </Group>
+      </Group>
+   </Group>
+</Workspace>
